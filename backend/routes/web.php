@@ -15,3 +15,5 @@ use App\Http\Controllers\VinController;
 */
 
 Route::get('/vins', [VinController::class, 'index']);
+
+Route::get('/vins_saq', [VinController::class, 'getVinsSaq']);

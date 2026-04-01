@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vin;
+use App\Services\SAQService;
+use Symfony\Component\VarDumper\VarDumper;
 
 class VinController extends Controller
 {
@@ -99,5 +101,10 @@ class VinController extends Controller
             'total' => $wines->total(),
             'filters' => $allFilters,
         ]);
+    }
+    public function getVinsSaq(SAQService $service)
+    {
+        $bouteilles = $service->getWines();
+        return $bouteilles;
     }
 }

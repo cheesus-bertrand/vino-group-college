@@ -23,6 +23,7 @@ class SAQService
 
   public function getWines($page = 1, $pageSize = 100)
   {
+
     $query = "
         {
           productSearch(
@@ -59,8 +60,24 @@ class SAQService
     $items = $response['data']['productSearch']['items'] ?? [];
     $total = $response['data']['productSearch']['total_count'] ?? 0;
 
+    // Filtrer les produits pour ne garder que ceux qui sont des bouteilles de vin
+    $bouteilles_de_vin = array_values(array_filter($items, function ($item) {
+      // Vérifier si le produit a un attribut "identite_produit" qui contient "vin", "champagne" ou "porto"
+      foreach (($item['productView']['attributes']) as $attribute) {
+        if (($attribute['name'] ?? '') === 'identite_produit' &&
+          (str_contains(strtolower($attribute['value']), 'vin') ||
+            str_contains(strtolower($attribute['value']), 'champagne') ||
+            str_contains(strtolower($attribute['value']), 'porto'))
+        ) {
+          return true;
+        }
+      }
+      return false;
+    }));
+
     return [
       // 'data' => $this->transform($items),
+      'bouteilles' => $bouteilles_de_vin,
       'total' => $total
     ];
   }
