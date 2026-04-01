@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Validator;
 class UsagerController extends Controller
 {
 
+    /**
+     * Récupération des usagers
+     *
+     * @return void
+     */
     public function index()
     {
         $usagers = Usager::all();
@@ -19,10 +24,10 @@ class UsagerController extends Controller
 
 
     /**
-     * Enregistre un nouveau usager
+     * Enregistrement d'usager 
+     * personnalisation des messages d'erreur
+     * faire la validation des données formulaire
      */
-
-
 
     public function store(Request $request)
     {
