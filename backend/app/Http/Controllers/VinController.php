@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vin;
+use App\Services\SAQService;
 
 class VinController extends Controller
 {
@@ -99,5 +100,29 @@ class VinController extends Controller
             'total' => $wines->total(),
             'filters' => $allFilters,
         ]);
+    }
+
+    /**
+     * Récupère les vins de la SAQ en utilisant le service SAQService
+     * Récupère les produits d'une page de résultats de la SAQ
+     * Filtre le résultat pour ne garder que les bouteilles de vin
+     * Formate les attributs des bouteilles de vin filtrées
+     * Retourne la liste des bouteilles de vin formatées
+     * @param SAQService $service
+     * @return array   
+     */
+    public function getVinsSaq(SAQService $service)
+    {
+        // Récupérer les produits d'une page de résultats de la SAQ'
+        $resultat = $service->getWines();
+
+        // Filtrer le resultat pour ne garder que les bouteilles de vin
+        $bouteillesVinFiltrees = $service->filtrerVins($resultat['bouteilles_de_vin']);
+
+        // Formater les attributs des bouteilles de vin filtrées
+        $bouteillesVinFormattees = $service->formatterAttributsVins($bouteillesVinFiltrees);
+
+        //  Retourner la liste des bouteilles de vin formatées
+        return $bouteillesVinFormattees;
     }
 }

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 //Vin
 Route::get('/vins', [VinController::class, 'index']);
+Route::get('/vins_saq', [VinController::class, 'getVinsSaq']);
 
 //Usager
 // Route::post('/usagers', [UsagerController::class, 'store']);
