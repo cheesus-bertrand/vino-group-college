@@ -125,4 +125,35 @@ class VinController extends Controller
         //  Retourner la liste des bouteilles de vin formatées
         return $bouteillesVinFormattees;
     }
+
+    /**
+     * Enregistre les données du SAQ en base de données.
+     * @param SAQService $service 
+     * @return string
+     */
+
+    public function store(SAQService $service)
+    {
+        $bouteilles = $this->getVinsSaq($service);
+        foreach ($bouteilles as $bouteille) {
+            Vin::updateOrCreate(
+                ['sku' => $bouteille['saq_id']],
+                [
+                'name' => $bouteille['nom'],
+                'price' => $bouteille['prix'],
+                'country' => $bouteille['pays'],
+                'region' => $bouteille['region'],
+                'grape' => $bouteille['cepage'], 
+                'alcohol' => $bouteille['degre_alcool'],
+                'sugar' => $bouteille['taux_sucre'],
+                'producer' => '', // à ajouter au besoin
+                'litre' => $bouteille['format'],
+                'millesime' => $bouteille['annee'],
+                'image' => $bouteille['image_url'],
+                'couleur' => $bouteille['couleur']
+                ]
+                );
+        }
+        return "Importation est terminé";
+    }
 }
