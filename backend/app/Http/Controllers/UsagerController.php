@@ -73,6 +73,7 @@ class UsagerController extends Controller
     /**
      * Met à jour les infos pesonnelles d'usager.
      * @param Request $request
+     * @param int $id
      * @return json reponse()
      */
     public function update(Request $request, $id)
@@ -81,11 +82,20 @@ class UsagerController extends Controller
         $usager = Usager::findOrFail($id);
 
         // Validation
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(),[
             'nom' => 'required|string|max:255',
             'courriel' => 'required|email|unique:usagers,courriel,' . $id,
             'mot_de_passe' => 'nullable|string|min:6',
-        ]);
+        ], $this->messages);
+
+        // retourne erreur
+        if ($validator->fails()) {
+            return response()->json([
+                'erreurs' => $validator->errors()
+            ], 422);
+        }
+
+        $validated = $validator->validated();
 
         // Mise à jour
         $usager->nom = $validated['nom'];
