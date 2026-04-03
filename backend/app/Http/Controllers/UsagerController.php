@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\Validator;
 
 class UsagerController extends Controller
 {
+    // liste des messages d'avertissement
+    protected $messages = [
+        'nom.required' => 'Le nom est obligatoire.',
+        'nom.string' => 'Le nom doit être une chaîne de caractères.',
+        'nom.max' => 'Le nom ne doit pas dépasser 255 caractères.',
+        'courriel.required' => 'Le courriel est obligatoire.',
+        'courriel.email' => 'Le courriel doit être une adresse email valide.',
+        'courriel.unique' => 'Ce courriel est déjà utilisé.',
+        'mot_de_passe.required' => 'Le mot de passe est obligatoire.',
+        'mot_de_passe.string' => 'Le mot de passe doit être une chaîne de caractères.',
+        'mot_de_passe.min' => 'Le mot de passe doit contenir au moins 6 caractères.',
+    ];
 
     /**
      * Récupération des usagers
@@ -30,24 +42,12 @@ class UsagerController extends Controller
      */
 
     public function store(Request $request)
-    {
-        $messages = [
-            'nom.required' => 'Le nom est obligatoire.',
-            'nom.string' => 'Le nom doit être une chaîne de caractères.',
-            'nom.max' => 'Le nom ne doit pas dépasser 255 caractères.',
-            'courriel.required' => 'Le courriel est obligatoire.',
-            'courriel.email' => 'Le courriel doit être une adresse email valide.',
-            'courriel.unique' => 'Ce courriel est déjà utilisé.',
-            'mot_de_passe.required' => 'Le mot de passe est obligatoire.',
-            'mot_de_passe.string' => 'Le mot de passe doit être une chaîne de caractères.',
-            'mot_de_passe.min' => 'Le mot de passe doit contenir au moins 6 caractères.',
-        ];
-
+    {        
         $validator = Validator::make($request->all(), [
             'nom' => 'required|string|max:255',
             'courriel' => 'required|email|unique:usagers,courriel',
             'mot_de_passe' => 'required|string|min:6',
-        ], $messages);
+        ], $this->messages);
 
         if ($validator->fails()) {
             throw new HttpResponseException(response()->json([
@@ -68,4 +68,41 @@ class UsagerController extends Controller
             'data' => $usager
         ], 201);
     }
+
+    
+    /**
+     * Met à jour les infos pesonnelles d'usager.
+     * @param Request $request
+     * @return json reponse()
+     */
+    public function update(Request $request, $id)
+    {
+        // Trouver l'usager
+        $usager = Usager::findOrFail($id);
+
+        // Validation
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'courriel' => 'required|email|unique:usagers,courriel,' . $id,
+            'mot_de_passe' => 'nullable|string|min:6',
+        ]);
+
+        // Mise à jour
+        $usager->nom = $validated['nom'];
+        $usager->courriel = $validated['courriel'];
+
+        // Mot de passe seulement s'il est fourni
+        if (!empty($validated['mot_de_passe'])) {
+            $usager->mot_de_passe = Hash::make($validated['mot_de_passe']);
+        }
+
+        $usager->save();
+
+        // Réponse
+        return response()->json([
+            'message' => 'Usager mis à jour avec succès',
+            'data' => $usager
+        ]);
+    }
+    
 }
