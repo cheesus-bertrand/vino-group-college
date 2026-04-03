@@ -1,7 +1,7 @@
 @import url("../base/base.css");
 
-/* CARD */
-.card {
+/* catalogue-carte */
+.catalogue-carte {
   background: var(--blanc-clair);
   border-radius: var(--espace-moyen-petit);
   padding: var(--fs-10);
@@ -13,12 +13,12 @@
   border: var(--espace-mini) solid black;
 }
 
-.card {
+.catalogue-carte {
   position: relative;
   overflow: hidden;
 }
 
-.image-container {
+.image-conteneur {
   text-align: center;
   padding: var(--fs-12);
 }
@@ -33,15 +33,15 @@
   font-size: var(--fs-24);
 }
 
-/* Content */
-.content {
+/* contenu */
+.contenu {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-/* NAME */
-.name {
+/* nom */
+.nom {
   font-size: var(--fs-16);
   font-weight: 900;
   margin-bottom: var(--espace-petit-neg);
@@ -52,7 +52,7 @@
   overflow: hidden;
 }
 
-.price {
+.prix {
   font-size: var(--fs-20);
   font-weight: bold;
   margin: var(--espace-zero) auto;
@@ -80,7 +80,7 @@
   margin-top: var(--espace-moyen-neg);
 }
 
-.color-dot {
+.couleur-point {
   display: inline-block;
   text-align: center;
   width: var(--fs-14);

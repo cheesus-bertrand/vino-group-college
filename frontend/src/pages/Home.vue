@@ -76,7 +76,7 @@
         </aside> -->
       <!-- </div> -->
 
-      <WineGrid v-if="!loading" :wines="wines" @add-to-cart="handleAddToCart" />
+      <WineGrid v-if="!loading" :vins="vins" @ajout-du-vin="ajoutDuVin" />
 
       <!-- <Pagination
         v-if="!loading && totalPages > 1"
@@ -127,7 +127,7 @@
     },
 
     computed: {
-      wines() {
+      vins() {
         return this.wineStore.wines;
       },
 
@@ -192,7 +192,7 @@
         this.showFilter = !this.showFilter;
       },
 
-      handleAddToCart(wine) {
+      ajoutDuVin(wine) {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
         const existing = cart.find((item) => item.id === wine.id);
         if (existing) {
