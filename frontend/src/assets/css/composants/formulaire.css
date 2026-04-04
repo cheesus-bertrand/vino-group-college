@@ -4,9 +4,7 @@ html {
 
 body {
   height: 100vh;
-  font-family:
-    Open Sans,
-    sans-serif;
+  font-family: Open Sans, sans-serif;
   background: #f1f1f1;
 }
 .container {
@@ -50,10 +48,7 @@ body {
   font-size: 5rem;
   font-weight: 700;
   font-family: serif;
-  text-shadow:
-    2px 2px 4px rgba(0, 0, 0, 0.8),
-    -1px -1px 0 #fff,
-    1px 1px 0 #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), -1px -1px 0 #fff, 1px 1px 0 #fff;
   padding: 10px 40px;
   background: rgba(255, 255, 255, 0.15);
 
@@ -114,7 +109,7 @@ body {
   color: var(--rouge-framboise-fonce);
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 910px) {
   .container {
     flex-direction: column;
     margin: 50px auto;
