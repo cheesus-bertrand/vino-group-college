@@ -39,7 +39,7 @@ class AuthController extends Controller
     /**
      * Deconnexion de l'usager
      */
-    public function destroy(string $id)
+    public function destroy()
     {
         Auth::logout();
         return response()->json(['message' => 'Deconnexion']);

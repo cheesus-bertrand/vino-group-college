@@ -18,8 +18,8 @@
       <div class="profil-action-icone" @click="supprimerUsager">
         <MinusCircleIcon class="profil-icone" />Supprimer votre compte
       </div>
-      <div class="profil-action-icone">
-        <ArrowRightStartOnRectangleIcon class="profil-icone" />
+      <div class="profil-action-icone" @click="deconnecterUsager">
+        <ArrowRightStartOnRectangleIcon class="profil-icone"/>
         Se déconnecter
       </div>
     </div>
@@ -97,6 +97,17 @@ export default {
         this.$router.push("/connexion-usager");
       } catch (erreur) {
         this.erreur = "Erreur lors de la suppression";
+      }
+    },
+
+    async deconnecterUsager() {
+      try {
+        //deconnexion du compte de l'usager
+        await api.post('/deconnexion');
+        // Redirige vers la page de connexion après la déconnexion
+        this.$router.push('/connexion-usager');
+      } catch (erreur) {
+        this.erreur = "Erreur lors de la deconnexion";
       }
     },
   },
