@@ -140,17 +140,17 @@ class VinController extends Controller
                     Vin::updateOrCreate(
                         ['sku' => $bouteille['saq_id']],
                         [
-                        'nom' => $bouteille['nom'],
-                        'prix' => $bouteille['prix'],
-                        'pays' => $bouteille['pays'],
-                        'region' => $bouteille['region'],
-                        'cepage' => $bouteille['cepage'], 
-                        'degre_alcool' => $bouteille['degre_alcool'],
-                        'taux_sucre' => $bouteille['taux_sucre'],
-                        'format' => $bouteille['format'],
-                        'annee' => $bouteille['annee'],
-                        'image_url' => $bouteille['image_url'],
-                        'couleur' => $bouteille['couleur']
+                        'nom' => $bouteille['nom']?? 'Nom inconnu',
+                        'prix' => $bouteille['prix']?? 0,
+                        'pays' => $bouteille['pays']?? null,
+                        'region' => $bouteille['region']?? null,
+                        'cepage' => $bouteille['cepage']?? null,
+                        'degre_alcool' => $bouteille['degre_alcool']?? null,
+                        'taux_sucre' => $bouteille['taux_sucre']?? null,
+                        'format' => $bouteille['format']?? null,
+                        'annee' => $bouteille['annee']?? null,
+                        'image_url' => $bouteille['image_url']?? null,
+                        'couleur' => $bouteille['couleur']?? null
                         ]
                     );
                 } 

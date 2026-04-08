@@ -1,3 +1,3 @@
 import './bootstrap';
-import WineList from './components/WineList.vue';
-app.component('wine-list', WineList);
+import Pagination from './components/Pagination.vue';
+app.component('pagination-component', Pagination);

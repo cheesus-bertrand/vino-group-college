@@ -1,0 +1,105 @@
+<template>
+  <div class="pagination">
+    <div class="nav-group">
+      <button 
+        :disabled="page === 1" 
+        @click="$emit('prev')"
+      >
+        &lsaquo;
+      </button>
+      
+      <span class="page-indicator">{{ page }} / {{ totalPages }}</span>
+      
+      <button 
+        :disabled="page === totalPages" 
+        @click="$emit('next')"
+      >
+        &rsaquo;
+      </button>
+    </div>
+
+    <div class="divider"></div>
+
+    <select :value="perPage" @change="$emit('changePerPage', $event.target.value)">
+      <option :value="12">12</option>
+      <option :value="24">24</option>
+      <option :value="48">48</option>
+    </select>
+  </div>
+</template>
+
+<script setup>
+defineProps({
+  page: Number,
+  totalPages: Number,
+  perPage: Number
+});
+
+defineEmits(['next', 'prev', 'changePage', 'changePerPage']);
+</script>
+
+<style scoped>
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 50px;
+  padding: 4px 12px;
+  margin: 1rem auto;
+  width: max-content;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.nav-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.page-indicator {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+  min-width: 45px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+button {
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  padding: 0 8px;
+  cursor: pointer;
+  color: #1e293b;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  color: #cbd5e1;
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background: #e2e8f0;
+  margin: 0 12px;
+}
+
+select {
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  outline: none;
+  padding-right: 4px;
+  -webkit-appearance: none; /* Removes default mobile styling */
+}
+</style>

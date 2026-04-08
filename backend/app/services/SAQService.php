@@ -52,7 +52,8 @@ class SAQService
           }
         }";
 
-    $response = Http::withHeaders($this->headers())
+    $response = Http::withoutVerifying()
+      ->withHeaders($this->headers())
       ->post($this->url, ['query' => $query])
       ->json();
 
