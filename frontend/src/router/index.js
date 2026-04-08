@@ -42,17 +42,18 @@ const routes = [
     path: "/catalogue",
     component: Home,
     meta: { requiresAuth: true },
-//    to test pagination:
-//    meta: { requiresAuth: false }, 
+    //    to test pagination:
+    //    meta: { requiresAuth: false },
   },
   {
     path: "/creer-cellier",
     component: CreationCellier,
   },
-  ,
+
   {
     path: "/dashboard",
     component: Dashboard,
+  },
   // redirige les URL non reconnu (dans notre code) pour /connexion-usager
   {
     path: "/:pathMatch(.*)*",
