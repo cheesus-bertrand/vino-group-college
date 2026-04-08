@@ -28,7 +28,30 @@ class CellierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validation des données d'entrée
+        $request->validate(
+            [
+                'nom' => 'required|string|min:2|max:50|unique:celliers,nom',
+            ],
+            [
+                'nom.required' => 'Le nom est obligatoire.',
+                'nom.min' => 'Le nom doit contenir au moins 2 caractères.',
+                'nom.max' => 'Le nom ne peut pas dépasser 50 caractères.',
+                'nom.unique' => 'Ce nom existe déjà.',
+            ]
+        );
+
+        // Création du cellier associé à l'usager connecté
+        $cellier = Cellier::create([
+            'nom' => $request->nom,
+            'usager_id' => $request->user()->id,
+        ]);
+
+        // Retour de la réponse JSON avec le cellier créé
+        return response()->json([
+            'message' => 'Cellier créé avec succès',
+            'data' => $cellier
+        ], 201);
     }
 
     /**

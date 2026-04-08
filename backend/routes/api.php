@@ -3,6 +3,7 @@
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CellierController;
 use App\Http\Controllers\UsagerController;
 
 /*
@@ -30,4 +31,7 @@ Route::middleware('web')->group(function () {
 
     Route::get('/afficher-usager', [UsagerController::class, 'afficherUsager']);
     Route::delete('/supprimer-usager', [UsagerController::class, 'supprimerUsager']);
+
+    // Routes pour la gestion des celliers    
+    Route::post('/creer-cellier', [CellierController::class, 'store']);
 });

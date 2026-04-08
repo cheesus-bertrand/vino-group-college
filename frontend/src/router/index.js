@@ -6,6 +6,7 @@ import Home from "../pages/Home.vue";
 import Cart from "../pages/Cart.vue";
 import ConnexionUsager from "../pages/usager/ConnexionUsager.vue";
 import ProfilUsager from "../pages/usager/ProfilUsager.vue";
+import CreationCellier from "../pages/cellier/CreationCellier.vue";
 
 const routes = [
   {
@@ -31,6 +32,10 @@ const routes = [
   {
     path: "/profil-usager",
     component: ProfilUsager,
+  },
+  {
+    path: "/creer-cellier",
+    component: CreationCellier,
   },
 ];
 
