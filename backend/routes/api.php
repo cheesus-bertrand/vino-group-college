@@ -21,6 +21,7 @@ use App\Http\Controllers\UsagerController;
 Route::post('/usagers', [UsagerController::class, 'store']);
 Route::put('/usagers/{id}', [UsagerController::class, 'update']);
 Route::get('/usagers/{id}', [UsagerController::class, 'show']);
+Route::delete('/supprimer-cellier/{cellier}', [CellierController::class, 'destroy']);
 
 Route::middleware('web')->group(function () {
 
@@ -43,4 +44,6 @@ Route::middleware('web')->group(function () {
     // Routes pour la gestion des celliers
     Route::post('/creer-cellier', [CellierController::class, 'store']);
     Route::get('/celliers', [CellierController::class, 'index']);
+    // Route::delete('/supprimer-cellier/{cellier}', [CellierController::class, 'destroy']);
+
 });
