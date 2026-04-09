@@ -15,18 +15,16 @@
     </div>
 
     <div class="bouton-celleir">
-
       <button
         class="btn btn-cellier"
         @click="$emit('ouvrir-modale', cellier.id)"
       >
         <Trash class="icons" />
       </button>
-      <button class="btn btn-cellier"><PencilLine class="icons" /></button>
+
       <button class="btn btn-cellier" @click="modifierCellier">
         <PencilLine class="icons" />
       </button>
-
     </div>
   </div>
 </template>
@@ -57,6 +55,5 @@ export default {
       }
     },
   },
-
 };
 </script>
