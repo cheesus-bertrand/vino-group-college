@@ -30,7 +30,7 @@ Route::middleware('web')->group(function () {
     });
 
     // Route pour verifier si un usager est connecter
-    Route::get('/usager', function () {
+    Route::get('/usagerConnecter', function () {
         $usager = auth()->user();
         return $usager ? response()->json($usager) : response()->json(null);
     });
@@ -42,7 +42,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/afficher-usager', [UsagerController::class, 'afficherUsager']);
     Route::delete('/supprimer-usager', [UsagerController::class, 'supprimerUsager']);
     Route::put('/usagers/{id}', [UsagerController::class, 'update']);
-    Route::get('/usagers/{id}', [UsagerController::class, 'show']); 
+    Route::get('/usagers/{id}', [UsagerController::class, 'show']);
     // Routes pour la gestion des celliers
     Route::post('/creer-cellier', [CellierController::class, 'store']);
     Route::put('/modifier-cellier/{id}', [CellierController::class, 'update']);

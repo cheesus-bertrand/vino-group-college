@@ -14,7 +14,6 @@ const routes = [
     path: "/",
     component: ConnexionUsager,
   },
-
   {
     path: "/connexion-usager",
     component: ConnexionUsager,
@@ -72,10 +71,16 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
 
-  //verifie si fetchUsager est en cours grace a authStore.loading, et rejoue la verification pour vraiment voir si l'usager est null ou pas
+  //verifie si fetchUsager est en cours grace a authStore.loading
   if (authStore.loading) {
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    return next();
+    await new Promise((resolve) => {
+      const stop = authStore.$subscribe((mutation, state) => {
+        if (!state.loading) {
+          stop();
+          resolve();
+        }
+      });
+    });
   }
 
   // Utile pour rester connecter au rechargement de la page

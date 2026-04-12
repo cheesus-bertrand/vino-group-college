@@ -91,6 +91,7 @@ export default {
           courriel: this.courriel,
         });
         this.messageSucces = "Votre compte a été mis à jour avec succès !";
+
         setTimeout(() => {
           this.messageSucces = "";
           if (this.ancien_courriel !== this.courriel) {

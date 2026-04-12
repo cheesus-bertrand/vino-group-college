@@ -15,7 +15,7 @@ export const useAuthStore = defineStore("auth", {
     async fetchUsager() {
       this.loading = true;
       try {
-        const reponse = await api.get("/usager");
+        const reponse = await api.get("/usagerConnecter");
         this.usager = reponse.data;
       } catch {
         this.usager = null;
