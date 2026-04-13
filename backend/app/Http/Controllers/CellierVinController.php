@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CellierVin;
 use Illuminate\Http\Request;
+use App\Models\Cellier;
 
 
 class CellierVinController extends Controller
@@ -13,7 +14,18 @@ class CellierVinController extends Controller
      */
     public function index()
     {
-        //
+        $cellier = Cellier::with(['cellierVins.vin'])->find($cellierId);
+
+        if ($cellier == false) {
+            return response()->json([
+                'message' => 'Ce cellier nest pas trouvé'
+            ], 404);
+        }
+
+        return response()->json([
+            'cellier' => $cellier,
+            'vins' => $cellier->cellierVins
+        ]);
     }
 
     /**
