@@ -1,6 +1,6 @@
 <template>
   <div class="nom-cellier">
-    <div @click="voirDetailVinCellier" class="cellier-item">
+    <div  class="cellier-item">
       <div class="vin-cellier-carte">
         <img
           src="../../public/bouteille.png"
@@ -22,16 +22,21 @@
       <button class="btn btn-cellier" @click="modifierCellier">
         <PencilLine class="icons" />
       </button>
+
+      <button class="btn btn-cellier" @click="voirDetailVinCellier">
+        <Eye class="icons" />
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import { Trash, PencilLine } from "lucide-vue-next";
+import { Trash, PencilLine, Eye } from "lucide-vue-next";
 export default {
   components: {
     Trash,
     PencilLine,
+    Eye,
   },
   name: "Cellier",
   props: {

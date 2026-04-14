@@ -1,6 +1,6 @@
 <template>
   <div class="nom-cellier">
-    <div class="vin-cellier-carte" @click="voirDetail">
+    <div class="vin-cellier-carte">
       <img :src="vin.image_url" :alt="vin.nom" class="cellier-img" />
       <div>
         <h2 class="nom">{{ vin.nom }}</h2>
@@ -16,17 +16,22 @@
       <button class="btn btn-cellier">
         <PencilLine class="icons" />
       </button>
+
+      <button class="btn btn-cellier" @click="voirDetail">
+        <Eye class="icons" />
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import { Trash, PencilLine } from "lucide-vue-next";
+import { Trash, PencilLine, Eye } from "lucide-vue-next";
 
 export default {
   components: {
     Trash,
     PencilLine,
+    Eye,
   },
   props: {
     vin: Object,

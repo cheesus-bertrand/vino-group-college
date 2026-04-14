@@ -16,7 +16,7 @@
       @prev="prevPage"
       @changePerPage="changePerPage"
     />
-    <div class="espace-catalogue"></div>
+    <div class="espacement"></div>
   </div>
 </template>
 

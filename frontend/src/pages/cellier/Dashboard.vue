@@ -25,6 +25,7 @@
     @confirm="confirmerSuppression"
     @cancel="afficherModale = false"
   />
+  <div class="espacement"></div>
 </template>
 
 <script>
