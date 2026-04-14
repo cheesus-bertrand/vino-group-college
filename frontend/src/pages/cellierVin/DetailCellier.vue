@@ -9,9 +9,19 @@
         v-for="item in vins"
         :key="item.id"
         :vin="item.vin"
+        :id="item.id"
         :quantite="item.quantite"
         @ouvrir-modale="ouvrirModale"
     />
+
+    <ModalConfirmation
+      :show="afficherModale"
+      message="Voulez-vous supprimer ce vin de ce cellier ?"
+      confirmText="Supprimer"
+      cancelText="Annuler"
+      @confirm="confirmerSuppression"
+      @cancel="afficherModale = false"
+  />
 
 </template>
 
@@ -55,6 +65,13 @@ export default {
     },
     async confirmerSuppression() {
         try{
+          await api.delete(`/cellier-vins/${this.idASupprimer}`);
+
+          // Supprimer localement
+          this.vins = this.vins.filter(item => item.id !== this.idASupprimer);
+
+          this.afficherModale = false;
+          this.idASupprimer = null;
 
         }catch(err) {
             this.erreur = "Erreur lors de la suppression d'une bouteille dans ce cellier";

@@ -15,7 +15,7 @@
     <div class="bouton-celleir">
       <button
         class="btn btn-cellier"
-        @click="$emit('ouvrir-modale', vin.id)"
+        @click="$emit('ouvrir-modale', id)"
       >
         <Trash class="icons" />
       </button>
@@ -38,6 +38,7 @@ export default {
   props: {
     vin: Object,
     quantite: Number,
+    id: Number,
   },
   data() {
     return {

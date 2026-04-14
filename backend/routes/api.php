@@ -54,4 +54,5 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     //Routes pour la gestion des bouteilles dans les celliers (CellierVins)
     Route::get('/detail-cellier/{id}', [CellierVinController::class, 'index']);
+    Route::delete('/cellier-vins/{cellierVin}', [CellierVinController::class, 'destroy']);
 });

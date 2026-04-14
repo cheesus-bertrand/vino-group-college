@@ -75,7 +75,7 @@ class CellierVinController extends Controller
                 'quantite' => $request->quantite,
             ]);
 
-            // Retourner une réponse de succès 
+            // Retourner une réponse de succès
             return response()->json([
                 'message' => 'Bouteille ajouté dans le cellier avec succès',
                 'data' => $cellierVin
@@ -112,6 +112,7 @@ class CellierVinController extends Controller
      */
     public function destroy(CellierVin $cellierVin)
     {
-        //
+        $cellierVin->delete();
+        return response()->json(['message' => 'Vin supprimé du cellier avec succès']);
     }
 }
