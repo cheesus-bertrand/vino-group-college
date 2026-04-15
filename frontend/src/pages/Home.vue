@@ -5,17 +5,18 @@
       <h2 class="banniere-titre">Catalogue des vins</h2>
     </div>
 
-    <div class="barre-recherche">
+    <div class="search-container">
+      <Search class="search-icon" />
       <input
         type="text"
         v-model="termeDeRecherche"
         placeholder="Rechercher un vin par nom..."
         @input="rechercherVins"
-        class="champ-de-recherche"
+        class="search-input"
       />
     </div>
 
-    <div class="resultats" v-if="!loading">
+    <div class="resultats-recherche" v-if="!loading">
       <p>
         Résultats {{ debut }} - {{ fin }} sur {{ total }}
         <span v-if="termeDeRecherche"> pour "{{ termeDeRecherche }}"</span>
@@ -42,12 +43,14 @@ import { useWineStore } from "../stores/wineStore";
 import WineGrid from "../components/WineGrid.vue";
 import Navbar from "../components/Navbar.vue";
 import Pagination from "../components/Pagination.vue";
+import { Search } from "lucide-vue-next";
 
 export default {
   components: {
     WineGrid,
     Navbar,
     Pagination,
+    Search,
   },
 
   data() {
