@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vin;
 use App\Services\SAQService;
+use App\Models\CellierVin;
 
 class VinController extends Controller
 {
@@ -96,5 +97,67 @@ class VinController extends Controller
             return "Données sont corrompues";
         }
         return "Importation est terminée";
+    }
+    public function creerBouteillePersonnalisee(Request $request)
+    {
+        $request->validate([
+            'nom' => 'required|string|max:100',
+            'prix' => 'required|numeric',
+            'pays' => 'nullable|string',
+            'region' => 'nullable|string',
+            'cepage' => 'nullable|string',
+            'degre_alcool' => 'nullable|string',
+            'taux_sucre' => 'nullable|string',
+            'format' => 'nullable|string|max:6',
+            'annee' => 'nullable|string|max:4',
+            'couleur' => 'nullable|string',
+            'quantite' => 'required|integer|min:1',
+        ], [
+            'nom.required' => 'Le nom de la bouteille est obligatoire.',
+            'nom.max' => 'Le nom ne peut pas dépasser 100 caractères.',
+            'prix.required' => 'Le prix de la bouteille est obligatoire.',
+            'format.max' => 'Le format ne peut pas dépasser 6 caractères.',
+            'annee.max' => 'Année doit avoir 4 caractères.',
+            'quantite.required' => 'La quantité est obligatoire.',
+            'quantite.min' => 'La quantité doit être au moins 1.',
+        ]);
+
+        $vinPersonnalise = Vin::create([
+            'sku' => 'PERSO-' . now()->format('YmdHis'),
+            'nom' => $request->input('nom'),
+            'prix' => $request->input('prix'),
+            'pays' => $request->input('pays'),
+            'region' => $request->input('region'),
+            'cepage' => $request->input('cepage'),
+            'degre_alcool' => $request->input('degre_alcool'),
+            'taux_sucre' => $request->input('taux_sucre'),
+            'format' => $request->input('format'),
+            'annee' => $request->input('annee'),
+            'image_url' => 'https://www.saq.com/media/catalog/product/placeholder/default_image.jpg',
+            'couleur' => $request->input('couleur')
+        ]);
+
+        if ($vinPersonnalise) {
+            $cellierVin = CellierVin::create([
+                'cellier_id' => $request->cellier_id,
+                'vin_id' => $vinPersonnalise->id,
+                'quantite' => $request->quantite,
+            ]);
+            if ($cellierVin) {
+                return response()->json([
+                    'message' => 'Bouteille de vin personnalisée ajoutée avec succès au cellier',
+                    'vin' => $vinPersonnalise,
+                    'cellier_vin' => $cellierVin
+                ], 201);
+            } else {
+                return response()->json([
+                    'message' => 'Erreur ajout de la bouteille au cellier'
+                ], 500);
+            }
+        } else {
+            return response()->json([
+                'message' => 'Erreur lors de la création de la bouteille de vin'
+            ], 500);
+        }
     }
 }

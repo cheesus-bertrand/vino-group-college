@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CellierController;
 use App\Http\Controllers\CellierVinController;
 use App\Http\Controllers\UsagerController;
+use App\Http\Controllers\VinController;
 
 
 /*
@@ -59,6 +60,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/detail-cellier/{id}', [CellierVinController::class, 'index']);
     Route::delete('/cellier-vins/{cellierVin}', [CellierVinController::class, 'destroy']);
     Route::get('/cellier-vin/{id}', [CellierVinController::class, 'show']);
+    Route::post('/creer-bouteille-perso', [VinController::class, 'creerBouteillePersonnalisee']);
 
     //Recherche bouteille dans les celliers
     Route::get('/bouteilles', [CellierController::class, 'bouteillesUsager']);

@@ -107,6 +107,16 @@
         {{ erreurs.couleur[0] }}
       </div>
 
+      <label>Quantité de bouteilles </label>
+      <input
+        class="form-input"
+        type="number"
+        v-model.number="quantite"
+        placeholder="0"
+      />
+      <div v-if="erreurs.quantite" class="erreur">
+        {{ erreurs.quantite[0] }}
+      </div>
       <button type="submit" class="signup-btn btn">Enregistrer</button>
 
       <div v-if="message" class="erreur">
@@ -138,6 +148,7 @@ export default {
       format: "",
       annee: "",
       couleur: "",
+      quantite: 0,
       erreurs: {},
       message: "",
       messageSucces: "",
@@ -167,7 +178,7 @@ export default {
           annee: this.annee,
           image_url: this.image_url,
           couleur: this.couleur,
-          couleur: this.couleur,
+          quantite: this.quantite,
           cellier_id: this.cellier_id,
         });
 
@@ -184,6 +195,7 @@ export default {
         this.annee = "";
         this.image_url = "";
         this.couleur = "";
+        this.quantite = 0;
 
         // afficher un message de succès et rediriger vers le catalogue après 2 secondes
         this.messageSucces =
@@ -192,7 +204,7 @@ export default {
           this.messageSucces = "";
           // rediriger vers la page de détail du cellier
           this.$router.push(`/detail-cellier/${this.cellier_id}`);
-        }, 2000);
+        }, 3000);
         // gestion des erreurs de validation et autres erreurs
       } catch (erreur) {
         if (erreur.response && error.response.status === 422) {
