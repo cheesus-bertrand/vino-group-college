@@ -19,8 +19,8 @@
         <button class="btn btn-entete-cellier" @click="toggleFilter">
           <ListFilter class="icon" /><span>Filtrer </span>
         </button>
-        <button class="btn btn-entete-cellier">
-          <ArrowDownUp class="icon" /><span>Trier </span>
+        <button class="btn btn-entete-cellier" @click="showTri = true">
+          <ArrowDownNarrowWide class="icon" /><span>Trier </span>
         </button>
       </div>
 
@@ -85,6 +85,13 @@
       </aside>
     </div>
 
+    <ModalTri
+      :show="showTri"
+      :tri="tri"
+      @apply="appliquerTri"
+      @close="showTri = false"
+    />
+
     <WineGrid v-if="!loading" :vins="vins" />
 
     <Pagination
@@ -105,9 +112,10 @@ import { useWineStore } from "../stores/wineStore";
 import WineGrid from "../components/WineGrid.vue";
 import Navbar from "../components/Navbar.vue";
 import Pagination from "../components/Pagination.vue";
-import { Search, ListFilter, ArrowDownUp } from "lucide-vue-next";
+import { Search, ListFilter, ArrowDownNarrowWide } from "lucide-vue-next";
 import FilterSection from "../components/FilterSelection.vue";
 import ColorFilter from "../components/ColorFilter.vue";
+import ModalTri from "../components/ModalTri.vue";
 
 export default {
   components: {
@@ -116,14 +124,17 @@ export default {
     Pagination,
     Search,
     ListFilter,
-    ArrowDownUp,
+    ArrowDownNarrowWide,
     FilterSection,
     ColorFilter,
+    ModalTri,
   },
 
   data() {
     return {
       showFilter: false,
+      showTri: false,
+      tri: 0,
       page: 1,
       perPage: 12,
       selected: {
@@ -204,6 +215,10 @@ export default {
       this.showFilter = !this.showFilter;
     },
 
+    toggleTri() {
+      this.showTri = !this.showTri;
+    },
+
     async fetchWines() {
       const filters = {};
       if (this.selected.countries.length)
@@ -224,6 +239,7 @@ export default {
         this.perPage,
         filters,
         this.termeDeRecherche,
+        this.tri
       );
     },
 
@@ -234,7 +250,7 @@ export default {
         0,
         this.perPage,
         filters,
-        this.termeDeRecherche,
+        this.termeDeRecherche
       );
     },
 
@@ -252,6 +268,12 @@ export default {
 
     changePerPage(val) {
       this.perPage = val;
+    },
+
+    appliquerTri(triChoisi) {
+      this.tri = triChoisi;
+      this.fetchWines();
+      this.showTri = false;
     },
   },
 

@@ -13,7 +13,8 @@ export const useWineStore = defineStore("wine", {
       page = 1,
       perPage = 12,
       selectedFilters = {},
-      recherche = ""
+      recherche = "",
+      choix = 0
     ) {
       this.loading = true;
 
@@ -22,6 +23,7 @@ export const useWineStore = defineStore("wine", {
 
         params.append("page", page);
         params.append("per_page", perPage);
+        params.append("tri", choix);
 
         if (recherche) {
           params.append("recherche", recherche);
