@@ -24,11 +24,40 @@ class ListeAchatController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Ajoute une bouteille de vin dans la liste d'achat
      */
     public function store(Request $request)
     {
-        //
+         // Validation des données d'entrée
+         $request->validate(
+            [
+                'usager_id' => 'required|exists:usagers,id',
+                'vin_id' =>     'required|exists:vins,id',
+            ],
+        );
+
+        // Vérification de l'existence du vin dans la liste d'achat
+        if (ListeAchat::where('vin_id', $request->vin_id)
+            ->where('usager_id', $request->usager_id)
+            ->exists()
+        ) {
+            // Si le vin existe déjà dans la liste d'achat, retourner un message d'erreur
+            return response()->json([
+                'message' => "Ce vin existe déjà la liste d'achat."
+            ], 422);
+        }
+        else {
+            // Si le vin n'existe pas dans le cellier, inserer le vin dans le cellier
+            $ListeAchat = ListeAchat::create([
+                'usager_id' => $request->usager_id,
+                'vin_id' => $request->vin_id,
+            ]);
+
+            // Retourner une réponse de succès
+            return response()->json([
+                'message' => "Bouteille a ete ajouté dans la liste d'achat avec succès",
+            ], 201);
+        }
     }
 
     /**

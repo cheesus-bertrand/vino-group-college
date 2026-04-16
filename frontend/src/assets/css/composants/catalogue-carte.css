@@ -144,6 +144,24 @@
   border: var(--espace-mini) solid black;
 }
 
+.liste-btn {
+  position: absolute;
+  bottom: var(--espace-gros-plus);
+  right: var(--espace-gros-plus);
+  background: var(--blanc-clair);
+  color: var(--noir-profond);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: var(--fs-14);
+  cursor: pointer;
+  backdrop-filter: blur(var(--espace-petit));
+  border-radius: var(--espace-moyen-mini);
+  padding: var(--espace-tres-petit) var(--espace-moyen-petit);
+  z-index: 3;
+  border: var(--espace-mini) solid black;
+}
+
 .info-btn span {
   font-size: var(--fs-12);
   font-weight: 700;

@@ -1,4 +1,12 @@
 <template>
+  <div v-if="messageSucces" class="bloc-modale-succes">
+    {{ this.messageSucces }}
+  </div>
+
+  <div v-if="message" class="erreur">
+    {{ this.message }}
+  </div>
+
   <div class="catalogue-carte">
     <div class="media">
       <div class="image-conteneur">
@@ -36,6 +44,10 @@
       </div>
     </div>
 
+    <button class="liste-btn" @click="ajouterListeAchats">
+      <ShoppingBasket />
+    </button>
+
     <button class="info-btn" @click.stop="toggleInfo">
       {{ montrerInfo ? "↓" : "↑" }}
       <span class="info-fleche">Infos</span>
@@ -44,7 +56,15 @@
 </template>
 
 <script>
+import { ShoppingBasket } from "lucide-vue-next";
+import api from "../api";
+import { useAuthStore } from "../stores/auth";
+
 export default {
+  components: {
+    ShoppingBasket,
+  },
+
   props: {
     vin: Object,
   },
@@ -52,6 +72,8 @@ export default {
   data() {
     return {
       montrerInfo: false,
+      messageSucces: "",
+      message: "",
     };
   },
 
@@ -108,6 +130,43 @@ export default {
 
       return { text: "AROMATIQUE ET ROND", color: "#c0392b" };
     },
+
+    async ajouterListeAchats() {
+      try {
+
+        this.message = "";
+        this.messageSucces = "";
+
+        // Récupérer l'utilisateur connecté
+        const authStore = useAuthStore();
+        await authStore.fetchUsager();
+        const usagerId = authStore.usager.id;
+
+         // Récupérer l'id du vin
+        const vinId = this.vin.id;
+
+        //appel api pour ajouter a la BD
+        const response = await api.post("/ajouter-bouteille-liste", {
+          usager_id: usagerId,
+          vin_id: vinId,
+        });
+
+        // afficher un message de succès
+        this.messageSucces =
+          "Votre bouteille a été ajoutée a la liste d'achat avec succès !";
+        setTimeout(() => {
+          this.messageSucces = "";
+        }, 2000);
+
+      }
+      // afficher message d'erreur
+      catch (erreur) {
+        this.message = "La bouteille n'a pas pu etre ajouter a la liste d'achat, car elle en fait deja parti"
+        setTimeout(() => {
+          this.message = "";
+        }, 4000);
+      }
+    }
   },
 };
 </script>

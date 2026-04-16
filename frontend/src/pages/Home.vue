@@ -9,7 +9,7 @@
       <input
         type="text"
         v-model="termeDeRecherche"
-        placeholder="Rechercher un vin par nom..."
+        placeholder="Rechercher une bouteille de vin par nom..."
         @input="rechercherVins"
         class="search-input"
       />
