@@ -43,6 +43,10 @@ export default {
         { value: "Blanc", hex: "#f1c40f", label: "Blanc" },
         { value: "Rosé", hex: "#ff6b81", label: "Rosé" },
         { value: "Orange", hex: "#e67e22", label: "Orange" },
+        { value: "Brun(e)", hex: "#3B2414", label: "Brun" },
+        { value: "Blanche", hex: "#FFF8E7", label: "Blanche" },
+        { value: "Ambré(e)", hex: "#C68642", label: "Ambre" },
+        { value: "Roux, rousse", hex: "#8B3A1E", label: "Roux, rousse" },
       ],
     };
   },
