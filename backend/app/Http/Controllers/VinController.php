@@ -52,6 +52,11 @@ class VinController extends Controller
                 break;
         }
 
+        /**
+         * Permet de ne pas afficher les bouteille personnalisées
+         */
+        $query->where('sku', 'not like', 'PERSO-%');
+
         $filters = $request->get('filters', []);
 
         if (!empty($recherche)) {
@@ -107,17 +112,18 @@ class VinController extends Controller
 
         $wines = $query->paginate($perPage, ['*'], 'page', $page);
 
-
+        /**Faire les filtres  sur les bouteilles de la SAQ et 
+         * exclure les bouteilles personnalisées
+         */
         $toutLesFilters = [
-            'countries' => Vin::distinct()->pluck('pays')->filter()->values(),
-            'regions' => Vin::distinct()->pluck('region')->filter()->values(),
-            'cepages' => Vin::distinct()->pluck('cepage')->filter()->values(),
-            'prix' => Vin::distinct()->pluck('prix')->filter()->values(),
-            'formats' => Vin::distinct()->pluck('format')->filter()->values(),
-            'degres' => Vin::distinct()->pluck('degre_alcool')->filter()->values(),
-            'millesimes' => Vin::distinct()->pluck('annee')->filter()->values(),
-            'couleur' => Vin::distinct()->pluck('couleur')->filter()->values(),
-
+            'countries' => Vin::where('sku', 'not like', 'PERSO-%')->distinct()->pluck('pays')->filter()->values(),
+            'regions' => Vin::where('sku', 'not like', 'PERSO-%')->distinct()->pluck('region')->filter()->values(),
+            'cepages' => Vin::where('sku', 'not like', 'PERSO-%')->distinct()->pluck('cepage')->filter()->values(),
+            'prix' => Vin::where('sku', 'not like', 'PERSO-%')->distinct()->pluck('prix')->filter()->values(),
+            'formats' => Vin::where('sku', 'not like', 'PERSO-%')->distinct()->pluck('format')->filter()->values(),
+            'degres' => Vin::where('sku', 'not like', 'PERSO-%')->distinct()->pluck('degre_alcool')->filter()->values(),
+            'millesimes' => Vin::where('sku', 'not like', 'PERSO-%')->distinct()->pluck('annee')->filter()->values(),
+            'couleur' => Vin::where('sku', 'not like', 'PERSO-%')->distinct()->pluck('couleur')->filter()->values(),
         ];
 
         return response()->json([
