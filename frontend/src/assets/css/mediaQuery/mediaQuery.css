@@ -37,7 +37,7 @@
   }
 
   .nom {
-    font-size: var(--fs-14);
+    font-size: var(--fs-16);
   }
 
   .info-media {
@@ -200,7 +200,7 @@
   }
 
   .nom {
-    font-size: var(--fs-12);
+    font-size: var(--fs-16);
   }
 
   .info-media {
