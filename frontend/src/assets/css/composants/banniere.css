@@ -12,7 +12,7 @@
   transform: translateX(-50%);
   text-align: center;
   background: var(--rouge-vin-profond);
-  /* z-index: 1000; */
+  z-index: 1000;
 }
 
 .banniere-titre {
@@ -23,6 +23,9 @@
 }
 
 @media screen and (min-width: 768px) {
+  .banniere {
+    z-index: 0;
+  }
   .mobile-navbar.banniere {
     top: 45px;
   }
