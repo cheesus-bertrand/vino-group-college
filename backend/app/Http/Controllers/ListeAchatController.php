@@ -11,9 +11,9 @@ class ListeAchatController extends Controller
      * Affiche la liste d'achats.
      */
     public function index()
-    {        
+    {
         $usager = auth()->user();
-        
+
         // Va chercher dans la DB le cellier qui correspond a $id
         $listeAchat = ListeAchat::with('vin')
             ->where('usager_id', $usager->id)
@@ -25,7 +25,7 @@ class ListeAchatController extends Controller
                 'message' => "Le details de cet achat n'est pas trouvé"
             ], 404);
         }
-        
+
         //retourne la liste d'achats correspondant au usager
         return response()->json([
             'liste_achats' => $listeAchat
@@ -45,8 +45,8 @@ class ListeAchatController extends Controller
      */
     public function store(Request $request)
     {
-         // Validation des données d'entrée
-         $request->validate(
+        // Validation des données d'entrée
+        $request->validate(
             [
                 'usager_id' => 'required|exists:usagers,id',
                 'vin_id' =>     'required|exists:vins,id'
@@ -62,18 +62,16 @@ class ListeAchatController extends Controller
             return response()->json([
                 'message' => "Ce vin existe déjà la liste d'achat."
             ], 422);
-        }
-        else {
-            // Si le vin n'existe pas dans le cellier, inserer le vin dans le cellier
+        } else {
+            // Si le vin n'existe pas dans la liste d'achat, créer une nouvelle entrée
             $ListeAchat = ListeAchat::create([
                 'usager_id' => $request->usager_id,
                 'vin_id' => $request->vin_id,
-                'quantite' => 1,
             ]);
 
             // Retourner une réponse de succès
             return response()->json([
-                'message' => "Bouteille a ete ajouté dans la liste d'achat avec succès",
+                'message' => "Bouteille ajoutée dans la liste d'achat avec succès",
             ], 201);
         }
     }
@@ -105,8 +103,23 @@ class ListeAchatController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ListeAchat $listeAchat)
+    public function destroy(Request $request)
     {
-        //
+        // Recuperer la bouteille de vin dans la liste d'achat
+        $listeAchat = ListeAchat::where('id', $request->id);
+
+        if (!$listeAchat) {
+            return response()->json([
+                'message' => "La bouteille de vin n'existe pas dans la liste d'achat."
+            ], 404);
+        }
+
+        // suppression de la bouteille de vin dans la liste d'achat
+        $listeAchat->delete();
+
+        // Retourner une réponse de succès
+        return response()->json([
+            'message' => "Bouteille supprimée de la liste d'achat avec succès."
+        ]);
     }
 }

@@ -311,7 +311,7 @@ class VinController extends Controller
             return response()->json(['message' => 'Bouteille non trouvée'], 404);
         }
         if (!str_starts_with($bouteilleVin->sku, 'PERSO-')) {
-            return response()->json(['message' => 'Bouteille alo de la SAQ ne doit pas être supprimée'], 400);
+            return response()->json(['message' => 'Bouteille de la SAQ ne doit pas être supprimée'], 400);
         }
 
         // Supprimer la bouteille de vin personnalisée

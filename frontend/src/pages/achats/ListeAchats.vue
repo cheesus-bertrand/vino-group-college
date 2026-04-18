@@ -14,7 +14,7 @@
 
   <ModalConfirmation
     :show="afficherModale"
-    message="Voulez-vous supprimer ce vin de ce cellier ?"
+    message="Voulez-vous supprimer ce vin de votre liste d'achat ?"
     confirmText="Supprimer"
     cancelText="Annuler"
     @confirm="confirmerSuppression"
@@ -36,8 +36,6 @@ export default {
   },
   data() {
     return {
-      cellierNom: "",
-      cellierId: "",
       vins: [],
       erreur: "",
       afficherModale: false,
@@ -54,19 +52,22 @@ export default {
         const response = await api.get("/liste-achats");
         this.vins = response.data.liste_achats;
       } catch (error) {
-        console.error("Erreur getUsager:", error);
+        console.error(
+          "Erreur lors de la récupération de la liste d'achats:",
+          error,
+        );
       }
     },
-    //Ouvrire la modale de suppression de bouteille du cellier
+    //Ouvrire la modale de suppression de bouteille de la liste d'achat
     ouvrirModale(id) {
       this.idASupprimer = id;
       this.afficherModale = true;
     },
-    // Une fois qui l'utilisateur confirme la suppression d'un bouteille du cellier
+    // Une fois qui l'utilisateur confirme la suppression d'un bouteille de la liste d'achat
     async confirmerSuppression() {
       try {
-        // supprimer grace a cette route dans le backend, qui supprime dans la DB
-        await api.delete(`/cellier-vins/${this.idASupprimer}`);
+        // supprimer la bouteille de la liste d'achat
+        await api.delete(`/liste-achats/${this.idASupprimer}`);
 
         // Supprimer localement
         this.vins = this.vins.filter((item) => item.id !== this.idASupprimer);
@@ -76,7 +77,7 @@ export default {
         this.idASupprimer = null;
       } catch (err) {
         this.erreur =
-          "Erreur lors de la suppression d'une bouteille dans ce cellier";
+          "Erreur lors de la suppression de la bouteille de la liste d'achat.";
       }
     },
   },

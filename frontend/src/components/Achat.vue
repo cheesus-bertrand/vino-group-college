@@ -7,7 +7,7 @@
       </div>
     </div>
 
-    <div class="bouton-celleir">
+    <div class="bouton-cellier">
       <button class="btn btn-cellier" @click="$emit('ouvrir-modale', id)">
         <Trash class="icons" />
       </button>
