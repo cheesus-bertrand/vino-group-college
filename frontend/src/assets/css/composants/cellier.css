@@ -20,8 +20,8 @@
 }
 
 .cellier-nom {
-  font-weight: 500;
-  margin-left: 15px;
+  font-weight: 600;
+  font-size: var(--fs-20);
 }
 
 .btn-cellier {

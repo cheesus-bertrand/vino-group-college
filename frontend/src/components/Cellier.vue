@@ -1,9 +1,9 @@
 <template>
   <div class="nom-cellier">
-    <div  class="cellier-item">
+    <div class="cellier-item">
       <div class="vin-cellier-carte">
         <img
-          src="../../public/bouteille.png"
+          src="../../public/cellier.svg"
           alt="bouteille"
           class="cellier-img"
         />

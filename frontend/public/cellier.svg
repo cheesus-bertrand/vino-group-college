@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_2" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 215.03 250.61">
+  <g id="Calque_1-2" data-name="Calque 1">
+    <g>
+      <path d="M105.8,80.08h0c17.9,0,32.43,14.53,32.43,32.43v129.36c0,4.53-3.68,8.2-8.2,8.2h-49.55c-4.53,0-8.2-3.68-8.2-8.2V113.6c0-18.51,15.02-33.53,33.53-33.53Z" fill="#ccc" stroke="#ccc" stroke-linecap="round" stroke-miterlimit="10"/>
+      <rect x="94.81" y="31.96" width="20.89" height="66.72" rx="3.55" ry="3.55" fill="#ccc" stroke="#ccc" stroke-linecap="round" stroke-miterlimit="10"/>
+      <rect x="91.29" y="20.73" width="27.48" height="22.77" rx="7.27" ry="7.27" fill="#ccc" stroke="#ccc" stroke-linecap="round" stroke-miterlimit="10"/>
+      <path d="M34.03,80.11h0c17.9,0,32.43,14.53,32.43,32.43v129.36c0,4.53-3.68,8.2-8.2,8.2H8.7c-4.53,0-8.2-3.68-8.2-8.2V113.64c0-18.51,15.02-33.53,33.53-33.53Z" fill="#8b0036" stroke="#8b0036" stroke-linecap="round" stroke-miterlimit="10"/>
+      <rect x="23.04" y="32" width="20.89" height="66.72" rx="3.55" ry="3.55" fill="#8b0036" stroke="#8b0036" stroke-linecap="round" stroke-miterlimit="10"/>
+      <rect x="19.51" y="20.77" width="27.48" height="22.77" rx="7.27" ry="7.27" fill="#8b0036" stroke="#8b0036" stroke-linecap="round" stroke-miterlimit="10"/>
+      <path d="M177.58,80.11h0c17.9,0,32.43,14.53,32.43,32.43v129.36c0,4.53-3.68,8.2-8.2,8.2h-49.55c-4.53,0-8.2-3.68-8.2-8.2V113.64c0-18.51,15.02-33.53,33.53-33.53Z" fill="#8b0036" stroke="#8b0036" stroke-linecap="round" stroke-miterlimit="10"/>
+      <rect x="166.58" y="32" width="20.89" height="66.72" rx="3.55" ry="3.55" fill="#8b0036" stroke="#8b0036" stroke-linecap="round" stroke-miterlimit="10"/>
+      <rect x="163.06" y="20.77" width="27.48" height="22.77" rx="7.27" ry="7.27" fill="#8b0036" stroke="#8b0036" stroke-linecap="round" stroke-miterlimit="10"/>
+    </g>
+  </g>
+</svg>

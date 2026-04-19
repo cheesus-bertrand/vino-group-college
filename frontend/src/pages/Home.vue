@@ -1,19 +1,7 @@
 <template>
   <Navbar />
   <div class="home">
-    <div class="banniere">
-      <h2 class="banniere-titre">Catalogue des vins</h2>
-    </div>
-    <div class="search-container">
-      <Search class="search-icon" />
-      <input
-        type="text"
-        v-model="termeDeRecherche"
-        placeholder="Rechercher une bouteille de vin par nom..."
-        @input="rechercherVins"
-        class="search-input"
-      />
-    </div>
+    <Logo />
     <div class="filtre">
       <div class="btn-recherche catalogue">
         <button class="btn btn-entete-cellier" @click="toggleFilter">
@@ -91,7 +79,19 @@
       @apply="appliquerTri"
       @close="showTri = false"
     />
-
+    <div class="search-container">
+      <Search class="search-icon" />
+      <input
+        type="text"
+        v-model="termeDeRecherche"
+        placeholder="Rechercher une bouteille de vin par nom..."
+        @input="rechercherVins"
+        class="search-input"
+      />
+    </div>
+    <p class="catalogue-description">
+      Parcourez et ajouter vos vins à vos celliers !
+    </p>
     <WineGrid v-if="!loading" :vins="vins" />
 
     <Pagination
@@ -116,6 +116,7 @@ import { Search, ListFilter, ArrowDownNarrowWide } from "lucide-vue-next";
 import FilterSection from "../components/FilterSelection.vue";
 import ColorFilter from "../components/ColorFilter.vue";
 import ModalTri from "../components/ModalTri.vue";
+import Logo from "../components/Logo.vue";
 
 export default {
   components: {
@@ -128,6 +129,7 @@ export default {
     FilterSection,
     ColorFilter,
     ModalTri,
+    Logo,
   },
 
   data() {
@@ -239,7 +241,7 @@ export default {
         this.perPage,
         filters,
         this.termeDeRecherche,
-        this.tri
+        this.tri,
       );
     },
 
@@ -250,7 +252,7 @@ export default {
         0,
         this.perPage,
         filters,
-        this.termeDeRecherche
+        this.termeDeRecherche,
       );
     },
 

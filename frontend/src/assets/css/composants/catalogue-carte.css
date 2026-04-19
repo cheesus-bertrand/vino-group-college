@@ -284,3 +284,9 @@
 .btn-achat {
   max-width: fit-content;
 }
+
+.catalogue-description {
+  font-size: var(--fs-16);
+  color: var(--gris-fonce);
+  padding: 10px 0;
+}

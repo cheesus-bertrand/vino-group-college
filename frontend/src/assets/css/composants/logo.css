@@ -1,0 +1,33 @@
+@import url("../base/base.css");
+
+.logo {
+  width: 100vw;
+  margin-left: 50%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 40px 20px;
+  background: var(--blanc-clair);
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--gris-clair-2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+}
+
+.logo-titre {
+  margin: 0;
+  font-size: var(--fs-24);
+  color: var(--gris-fonce);
+  line-height: 1.2;
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
