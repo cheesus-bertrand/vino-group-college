@@ -185,4 +185,27 @@ export default {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
+
+@media (min-width: 1024px) {
+  .catalogue-carte {
+    border: 1px solid var(--gris-clair);
+    box-shadow: 0 2px 8px var(--noir-semi-transparent);
+    border-radius: 15px;
+    background: var(--blanc-clair);
+  }
+
+  .info-btn, 
+  .fixed-btn, 
+  .catalogue-carte-btn, 
+  .liste-btn {
+    border: 1px solid var(--gris-clair);
+    box-shadow: 0 1px 3px var(--noir-tres-transparent);
+  }
+
+  .catalogue-carte:hover {
+    border-color: var(--gris-semi-transparent);
+    box-shadow: 0 4px 12px var(--noir-semi-transparent);
+    transform: translateY(-2px);
+  }
+}  
 </style>
