@@ -174,7 +174,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
   .nom {
     font-size: 1.1rem;
     line-height: 1.2;
