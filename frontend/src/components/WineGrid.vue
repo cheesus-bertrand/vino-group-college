@@ -15,7 +15,9 @@ export default {
   props: {
     vins: Array,
   },
-  data() {},
+  data() {
+    return {};
+  },
   methods: {
     ajoutDuVin(vin) {
       this.$emit("ajout-du-vin", vin);
