@@ -1,5 +1,6 @@
 <template>
   <div class="nom-cellier">
+    <!-- Afficher le nom du cellier -->
     <div class="cellier-item">
       <div class="vin-cellier-carte">
         <img
@@ -10,7 +11,7 @@
         <div class="cellier-nom">{{ cellier.nom }}</div>
       </div>
     </div>
-
+    <!-- Boutons d'action pour voir les détails, modifier ou supprimer un cellier -->
     <div class="bouton-cellier">
       <button class="btn btn-cellier" @click="voirDetailVinCellier">
         <Eye class="icons" />
@@ -49,9 +50,11 @@ export default {
     };
   },
   methods: {
+    // Naviguer vers la page de détails du cellier
     voirDetailVinCellier() {
       this.$router.push(`/detail-cellier/${this.cellier.id}`);
     },
+    // Naviguer vers la page de modification du cellier
     async modifierCellier() {
       try {
         this.$router.push(`/modifier-cellier/${this.cellier.id}`);

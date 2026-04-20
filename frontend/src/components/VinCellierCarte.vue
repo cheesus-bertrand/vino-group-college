@@ -1,18 +1,20 @@
 <template>
+  <!-- Affichage des messages de succès et d'erreur -->
   <div v-if="messageSucces" class="bloc-modale-succes">
     {{ this.messageSucces }}
   </div>
-
+  <!-- Affichage du message d'erreur -->
   <div v-if="message" class="erreur">
     {{ this.message }}
   </div>
-
+  <!-- Affichage de la carte du vin dans le cellier -->
   <div class="nom-cellier">
     <div class="vin-cellier-carte">
       <img :src="vin.image_url" :alt="vin.nom" class="cellier-img" />
       <div>
         <h2 class="nom">{{ vin.nom }}</h2>
         <p class="meta">Quantité: {{ quantite }}</p>
+        <!-- Boutons pour modifier la quantité de bouteilles -->
         <button
           @click="modifierQuantiteVin(quantite - 1)"
           :disabled="quantite <= 1"
@@ -25,16 +27,16 @@
         </button>
       </div>
     </div>
-
+    <!-- Boutons pour voir les détails, ajouter à la liste d'achats et supprimer le vin du cellier -->
     <div class="bouton-cellier">
       <button class="btn btn-cellier" @click="voirDetail">
         <Eye class="icons" />
       </button>
-
+      <!-- Bouton pour ajouter le vin à la liste d'achats -->
       <button class="btn btn-cellier" @click="ajouterListeAchats">
         <ShoppingBasket class="icons" />
       </button>
-
+      <!-- Bouton pour supprimer le vin du cellier, émet un événement vers le parent pour ouvrir une modale de confirmation -->
       <button class="btn btn-cellier" @click="$emit('ouvrir-modale', id)">
         <Trash class="icons" />
       </button>
@@ -76,6 +78,7 @@ export default {
     };
   },
   methods: {
+    // Navigation vers la page de détails du vin
     voirDetail() {
       this.$router.push(`/cellier-vin/${this.id}`);
     },
@@ -85,6 +88,7 @@ export default {
 
       try {
         await fetchCsrfToken();
+        //appel api pour modifier la quantité dans la BD
         await api.put(`/modifier-quantite/${this.id}`, {
           quantite: nouvelleQuantite,
         });
@@ -98,6 +102,7 @@ export default {
         console.error(erreur);
       }
     },
+    // Envoie de requete pour ajouter le vin à la liste d'achats
     async ajouterListeAchats() {
       try {
         this.message = "";

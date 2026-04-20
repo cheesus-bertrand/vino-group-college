@@ -1,5 +1,6 @@
 <template>
   <div class="nom-cellier">
+    <!-- Afficher les détails du vin -->
     <div class="vin-cellier-carte">
       <img :src="vin.image_url" :alt="vin.nom" class="cellier-img" />
       <div>
@@ -9,6 +10,7 @@
       </div>
     </div>
 
+    <!-- Boutons d'action pour ajouter au cellier, voir les détails, ou supprimer -->
     <div class="bouton-cellier">
       <button class="btn btn-cellier" @click="ajouterAuCellier">
         <Plus class="icons" />
@@ -44,10 +46,12 @@ export default {
     };
   },
   methods: {
+    // Redirige vers la page de détails du vin
     voirDetail() {
       this.$router.push(`/liste-achats-vin/${this.id}`);
     },
 
+    // Redirige vers la page d'ajout de bouteille au cellier
     ajouterAuCellier() {
       this.$router.push(`/bouteille/AjouterBouteille/${this.vin.id}`);
     },

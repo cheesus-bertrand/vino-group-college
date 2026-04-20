@@ -1,4 +1,5 @@
 <template>
+  <!-- Affiche une carte détaillée pour une bouteille de vin, avec des informations -->
   <div class="entete"></div>
   <div class="vin-carte">
     <div class="vin-entete">
@@ -21,6 +22,7 @@
       </div>
     </div>
   </div>
+  <!-- Affiche les détails de la bouteille de vin, tels que le pays, la région, le cépage, etc. -->
   <div class="vin-card vin-infos">
     <div class="vin-contenu details">
       <h2 class="vin-titre">Détails :</h2>
@@ -53,6 +55,7 @@ export default {
   },
 
   methods: {
+    // Formate le prix en utilisant la locale canadienne et la devise CAD
     formatPrice(prix) {
       return new Intl.NumberFormat("fr-CA", {
         style: "currency",
@@ -77,6 +80,7 @@ export default {
       this.$emit("modifier-bouteille", this.bouteilleVin);
     },
 
+    // Permet de revenir à la page précédente
     retour() {
       this.$router.go(-1);
     },

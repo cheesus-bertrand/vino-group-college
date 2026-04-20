@@ -1,4 +1,5 @@
 <template>
+  <!-- Affichage conditionnel des messages de succès et d'erreur -->
   <div v-if="messageSucces" class="bloc-modale-succes">
     {{ this.messageSucces }}
   </div>
@@ -6,7 +7,7 @@
   <div v-if="message" class="erreur">
     {{ this.message }}
   </div>
-
+  <!-- Carte de vin dans le catalogue -->
   <div class="catalogue-carte">
     <div class="media">
       <div class="image-conteneur">
@@ -25,12 +26,14 @@
           ></span>
         </p>
         <div class="catalogue-carte-actions">
+          <!-- Lien pour ajouter la bouteille au cellier -->
           <router-link
             class="catalogue-carte-btn"
             :to="`/bouteille/AjouterBouteille/${vin.id}`"
           >
             Ajouter au cellier
           </router-link>
+          <!-- Bouton pour ajouter la bouteille à la liste d'achats -->
           <button
             class="liste-btn catalogue-carte-btn btn-achat"
             @click="ajouterListeAchats"
@@ -40,6 +43,7 @@
         </div>
       </div>
     </div>
+    <!-- Affichage des informations supplémentaires au survol -->
     <div class="hover-info" :class="{ active: montrerInfo }">
       <div class="info-media">
         <p>Région : {{ vin.region }}</p>
@@ -49,7 +53,7 @@
         <p>Millésime : {{ vin.annee }}</p>
       </div>
     </div>
-
+    <!-- Bouton pour basculer l'affichage des informations supplémentaires -->
     <button class="info-btn" @click.stop="toggleInfo">
       {{ montrerInfo ? "↓" : "↑" }}
       <span class="info-fleche">Infos</span>
@@ -80,24 +84,26 @@ export default {
   },
 
   computed: {
+    // Calcul du badge en fonction du nom du vin
     badge() {
       return this.chercherBadge(this.vin);
     },
-
+    // Formatage du taux d'alcool
     alcoolFormatter() {
       if (!this.vin.alcohol) return "-";
       const num = parseFloat(this.vin.alcohol);
       if (isNaN(num)) return this.vin.alcohol;
       return num.toFixed(2);
     },
-
-  prixFormate() {
-    if (!this.vin.prix) return "0.00";
+    // Formatage du prix
+    prixFormate() {
+      if (!this.vin.prix) return "0.00";
       return Number(this.vin.prix).toFixed(2);
     },
   },
 
   methods: {
+    // Fonction pour déterminer la couleur du point en fonction de la couleur du vin
     chercherCouleur(couleur) {
       if (!couleur) return "#ccc";
 
@@ -112,10 +118,11 @@ export default {
 
       return "#999";
     },
+    // Fonction pour basculer l'affichage des informations supplémentaires
     toggleInfo() {
       this.montrerInfo = !this.montrerInfo;
     },
-
+    // Fonction pour déterminer le badge en fonction du nom du vin
     chercherBadge(vin) {
       const name = vin.name.toLowerCase();
 
@@ -137,7 +144,7 @@ export default {
 
       return { text: "AROMATIQUE ET ROND", color: "#c0392b" };
     },
-
+    // Fonction pour ajouter la bouteille à la liste d'achats
     async ajouterListeAchats() {
       try {
         this.message = "";
@@ -183,9 +190,9 @@ export default {
     background: var(--blanc-clair);
   }
 
-  .info-btn, 
-  .fixed-btn, 
-  .catalogue-carte-btn, 
+  .info-btn,
+  .fixed-btn,
+  .catalogue-carte-btn,
   .liste-btn {
     border: 1px solid var(--gris-clair);
     box-shadow: 0 1px 3px var(--noir-tres-transparent);
@@ -196,5 +203,5 @@ export default {
     box-shadow: 0 4px 12px var(--noir-semi-transparent);
     transform: translateY(-2px);
   }
-}  
+}
 </style>

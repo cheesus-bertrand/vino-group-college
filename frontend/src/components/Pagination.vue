@@ -1,26 +1,22 @@
 <template>
+  <!-- Pagination permet de naviguer entre les pages de résultats et de choisir le nombre d'items par page -->
   <div class="pagination">
     <div class="nav-group">
-      <button
-        :disabled="page === 1"
-        @click="$emit('prev')"
-      >
-        &lsaquo;
-      </button>
+      <button :disabled="page === 1" @click="$emit('prev')">&lsaquo;</button>
 
       <span class="page-indicator">{{ page }} / {{ totalPages }}</span>
 
-      <button
-        :disabled="page === totalPages"
-        @click="$emit('next')"
-      >
+      <button :disabled="page === totalPages" @click="$emit('next')">
         &rsaquo;
       </button>
     </div>
 
     <div class="divider"></div>
 
-    <select :value="perPage" @change="$emit('changePerPage', $event.target.value)">
+    <select
+      :value="perPage"
+      @change="$emit('changePerPage', $event.target.value)"
+    >
       <option :value="12">12</option>
       <option :value="24">24</option>
       <option :value="48">48</option>
@@ -32,10 +28,10 @@
 defineProps({
   page: Number,
   totalPages: Number,
-  perPage: Number
+  perPage: Number,
 });
 
-defineEmits(['next', 'prev', 'changePage', 'changePerPage']);
+defineEmits(["next", "prev", "changePage", "changePerPage"]);
 </script>
 
 <style scoped>
