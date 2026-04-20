@@ -114,3 +114,46 @@ export default {
   },
 };
 </script>
+<style scoped>
+@media (min-width: 1024px) {
+  .container {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 5rem auto;
+  }
+
+  .bloc-img {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    max-height: 400px;
+  }
+
+  .bloc-img img {
+    max-width: 350px;
+    height: auto;
+  }
+
+  .bloc-form {
+    flex: 1;
+    max-width: 450px;
+    margin: 0;
+    text-align: left;
+  }
+
+  .signup-btn {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .already-txt {
+    text-align: center;
+    margin-top: 1rem;
+  }
+}
+</style>
