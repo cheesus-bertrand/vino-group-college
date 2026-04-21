@@ -44,21 +44,21 @@
       <ColorFilter v-model="selected.couleur" />
 
       <FilterSelect
-        :key="selected.reinitialiser"
+        :key="reinitialiser"
         label="Pays"
         :items="filters.countries"
         v-model="selected.countries"
       />
 
       <FilterSelect
-        :key="selected.reinitialiser"
+        :key="reinitialiser"
         label="Régions"
         :items="filters.regions"
         v-model="selected.regions"
       />
 
       <FilterSelect
-        :key="selected.reinitialiser"
+        :key="reinitialiser"
         label="Cépages"
         :items="filters.cepages"
         v-model="selected.cepages"
@@ -66,14 +66,14 @@
 
       <FourchetteFiltre
         v-if="filters.prix"
-        :key="selected.reinitialiser"
+        :key="reinitialiser"
         v-model="selected.prix"
         :minLimit="safeNumber(filters.prix.min)"
         :maxLimit="safeNumber(filters.prix.max)"
       />
 
       <FourchetteFiltre
-        :key="selected.reinitialiser"
+        :key="reinitialiser"
         v-model="selected.format"
         :minLimit="safeNumber(filters.format.min)"
         :maxLimit="safeNumber(filters.format.max)"
@@ -81,14 +81,14 @@
       />
 
       <FourchetteFiltre
-        :key="selected.reinitialiser"
+        :key="reinitialiser"
         v-model="selected.degres"
         :minLimit="safeNumber(filters.degres.min)"
         :maxLimit="safeNumber(filters.degres.max)"
         label="Degré (%)"
       />
       <AnneeFiltreSelect
-        :key="selected.reinitialiser"
+        :key="reinitialiser"
         :items="filters.millesimes"
         v-model="selected.millesimes"
         label="Millésimes"

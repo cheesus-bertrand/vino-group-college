@@ -353,7 +353,7 @@ export default {
         prix: { min: null, max: null },
         format: { min: null, max: null },
         degres: { min: null, max: null },
-        millesimes: { min: null, max: null },
+        millesimes: [],
         couleur: [],
       };
 
