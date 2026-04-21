@@ -41,7 +41,7 @@ export default {
   emits: ["apply", "close"],
   props: {
     show: Boolean,
-    tri: String,
+    tri: [String, Number],
     tous: {
       type: String,
       default: "Tout désélectionner",

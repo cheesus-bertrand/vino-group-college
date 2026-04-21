@@ -217,6 +217,7 @@ export default {
 
   data() {
     return {
+      reinitialiser: 0,
       search: "",
       bouteilles: [],
       showFilter: false,
@@ -232,7 +233,6 @@ export default {
         degres: { min: null, max: null },
         millesimes: [],
         couleur: [],
-        reinitialiser: 0,
       },
 
       filters: {
@@ -248,6 +248,7 @@ export default {
 
       afficherModale: false,
       idASupprimer: null,
+      reinitialiser: 0,
     };
   },
 
