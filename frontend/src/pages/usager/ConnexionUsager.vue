@@ -4,6 +4,12 @@
     <div class="bloc-img">
       <img src="../../assets/img/logo3.svg" />
     </div>
+
+    <!-- Affiche une notification -->
+    <div v-if="notifStore.message" :class="['notif', notifStore.type]">
+      {{ notifStore.message }}
+    </div>
+
     <!-- Formulaire de connexion -->
     <form class="bloc-form" @submit.prevent="connexion">
       <div>
@@ -43,6 +49,7 @@
 <script>
 import api, { fetchCsrfToken } from "../../api";
 import { useAuthStore } from "../../stores/auth";
+import { useNotifStore } from '../../stores/notification';
 
 export default {
   data() {
@@ -75,6 +82,9 @@ export default {
           const authStore = useAuthStore();
           await authStore.fetchUsager();
 
+          //ajout d'une notification pour le catalogue
+          const notif = useNotifStore();
+          notif.montreMessage('Vous avez été connecté avec succès!', 'bloc-modale-succes');
           // Redirection vers le catalogue
           this.$router.push("/catalogue");
         }
@@ -108,6 +118,10 @@ export default {
       }
     },
   },
+  setup() {
+    const notifStore = useNotifStore();
+    return { notifStore };
+  }
 };
 </script>
 <style scoped>

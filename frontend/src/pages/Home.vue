@@ -119,7 +119,7 @@
       Parcourez et ajouter vos vins à vos celliers !
     </p>
 
-    <!-- Affiche une notification pour l'ajout a un cellier -->
+    <!-- Affiche une notification -->
     <div v-if="notifStore.message" :class="['notif', notifStore.type]">
         {{ notifStore.message }}
     </div>
