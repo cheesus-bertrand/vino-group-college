@@ -1,5 +1,7 @@
 <template>
   <Navbar />
+
+
   <div class="home">
     <Logo />
     <!-- Filtres -->
@@ -12,6 +14,9 @@
           <ArrowDownNarrowWide class="icon" /><span>Trier </span>
         </button>
       </div>
+
+
+
       <!-- afficher les filtres si showFilter est true -->
       <div
         class="filtre-ouvrir"
@@ -114,6 +119,11 @@
       Parcourez et ajouter vos vins à vos celliers !
     </p>
 
+    <!-- Affiche une notification pour l'ajout a un cellier -->
+    <div v-if="notifStore.message" :class="['notif', notifStore.type]">
+        {{ notifStore.message }}
+    </div>
+
     <WineGrid v-if="!loading" :vins="vins" />
     <!-- Pagination du catalogue -->
     <Pagination
@@ -142,6 +152,7 @@ import AnneeFiltreSelect from "../components/AnneeFiltreSelect.vue";
 import ColorFilter from "../components/ColorFilter.vue";
 import ModalTri from "../components/ModalTri.vue";
 import Logo from "../components/Logo.vue";
+import { useNotifStore } from '../stores/notification';
 
 export default {
   components: {
@@ -378,6 +389,10 @@ export default {
   async mounted() {
     await this.fetchWines();
   },
+  setup() {
+    const notifStore = useNotifStore();
+    return { notifStore };
+  }
 };
 </script>
 

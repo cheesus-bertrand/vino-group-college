@@ -45,6 +45,7 @@
 <script>
 import Navbar from "../../components/Navbar.vue";
 import api from "../../api";
+import { useNotifStore } from '../../stores/notification';
 
 export default {
   components: {
@@ -69,7 +70,7 @@ export default {
         const response = await api.get("/celliers");
         this.celliers = response.data.data;
       } catch (erreur) {
-        this.erreur = "Une erreur est survenue";
+        this.message = "Une erreur est survenue";
       }
     },
     // méthode pour ajouter une bouteille au cellier
@@ -91,19 +92,24 @@ export default {
 
         this.cellierVin = response.data;
 
-        // afficher un message de succès et rediriger vers le catalogue après 2 secondes
-        this.messageSucces =
-          "Votre bouteille a été ajoutée au cellier avec succès !";
-        setTimeout(() => {
-          this.messageSucces = "";
-          this.$router.back();
-        }, 2000);
+        //envoy une notification au catalogue, une fois qu'on y retourne
+        const notif = useNotifStore();
+        notif.montreMessage('Votre bouteille a été ajoutée au cellier avec succès!', 'bloc-modale-succes');
+
+        this.$router.push('/catalogue');
+
       } catch (erreur) {
         if (erreur.response.data.errors) {
           this.erreurs = erreur.response.data.errors;
         } else {
           if (erreur.response.data.message) {
             this.message = erreur.response.data.message;
+
+            //envoy une notification d'erreurs au catalogue, une fois qu'on y retourne
+            const notif = useNotifStore();
+            notif.montreMessage(this.message, 'erreur');
+
+            this.$router.push('/catalogue');
           }
         }
       }
