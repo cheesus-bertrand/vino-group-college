@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Modèle représentant un vin.
+ */
 class Vin extends Model
 {
     use HasFactory;
+    // attributs pouvant être assignés en masse
     protected $fillable = [
         'sku',
         'nom',
@@ -23,13 +27,15 @@ class Vin extends Model
         'couleur'
     ];
 
+    // ajouter la relation avec CellierVin
     public function cellierVins()
     {
         return $this->hasMany(CellierVin::class);
     }
 
+    // ajouter la relation avec ListeAchat
     public function listeAchats()
     {
-        return $this->hasMany(listeAchat::class);
+        return $this->hasMany(ListeAchat::class);
     }
 }

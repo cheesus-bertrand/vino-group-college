@@ -7,33 +7,34 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * Modèle représentant un usager.
+ */
 class Usager extends Authenticatable
 {
     use HasFactory;
 
     protected $table = 'usagers';
-
+    // attributs pouvant être assignés en masse
     protected $fillable = [
         'nom',
         'courriel',
         'mot_de_passe',
     ];
 
+    // masquer les attributs lors de la sérialisation du modèle
     protected $hidden = [
         'mot_de_passe',
         'remember_token',
     ];
 
-    // public function getAuthIdentifierName()
-    // {
-    //     return 'courriel';
-    // }
-
+    // Retourne le mot de passe utilisé pour l'authentification.
     public function getAuthPassword()
     {
         return $this->mot_de_passe;
     }
 
+    // retourne le token de reconnexion automatique
     public function getRememberTokenName()
     {
         return 'remember_token';
