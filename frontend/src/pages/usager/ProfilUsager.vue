@@ -63,6 +63,7 @@
 import { MinusCircleIcon } from "@heroicons/vue/24/solid";
 import { PencilIcon } from "@heroicons/vue/24/solid";
 import { ArrowRightStartOnRectangleIcon } from "@heroicons/vue/24/solid";
+import { useNotifStore } from '../../stores/notification';
 </script>
 
 <script>
@@ -113,8 +114,14 @@ export default {
     //
     async deconnecterUsager() {
       try {
+
         //deconnexion du compte de l'usager
         await api.post("/deconnexion");
+
+        //ajout d'une notification pour le catalogue
+        const notif = useNotifStore();
+        notif.montreMessage('Vous avez été deconnecté avec succès!', 'bloc-modale-succes');
+
         // Redirige vers la page de connexion après la déconnexion
         this.$router.push("/connexion-usager");
       } catch (erreur) {
