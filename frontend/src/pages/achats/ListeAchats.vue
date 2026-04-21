@@ -4,6 +4,10 @@
   <div class="banniere">
     <h2 class="banniere-titre">Liste d'achats</h2>
   </div>
+  <!-- Affiche une notification -->
+  <div v-if="notifStore.message" :class="['notif', notifStore.type]">
+    {{ notifStore.message }}
+  </div>
   <!-- Description de la page -->
   <p class="catalogue-description">
     Ajoutez vos vins à vos celliers, consultez-les ou supprimez-les selon vos
@@ -33,6 +37,7 @@ import Navbar from "../../components/Navbar.vue";
 import Achat from "../../components/Achat.vue";
 import ModalConfirmation from "../../components/ModalConfirmation.vue";
 import api, { fetchCsrfToken } from "../../api";
+import { useNotifStore } from '../../stores/notification';
 
 export default {
   components: {
@@ -84,6 +89,10 @@ export default {
           "Erreur lors de la suppression de la bouteille de la liste d'achat.";
       }
     },
+  },
+  setup() {
+    const notifStore = useNotifStore();
+    return { notifStore };
   },
   // Appel de la méthode pour récupérer les informations de la liste d'achat dès que le composant est monté
   mounted() {

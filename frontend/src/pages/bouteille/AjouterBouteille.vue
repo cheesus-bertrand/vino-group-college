@@ -96,7 +96,7 @@ export default {
         const notif = useNotifStore();
         notif.montreMessage('Votre bouteille a été ajoutée au cellier avec succès!', 'bloc-modale-succes');
 
-        this.$router.push('/catalogue');
+        this.$router.back();
 
       } catch (erreur) {
         if (erreur.response.data.errors) {

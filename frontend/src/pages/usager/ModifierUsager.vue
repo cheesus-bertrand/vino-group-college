@@ -38,6 +38,8 @@
 import axios from "axios";
 import Navbar from "../../components/Navbar.vue";
 import api, { fetchCsrfToken } from "../../api";
+import { useNotifStore } from '../../stores/notification';
+
 export default {
   components: {
     Navbar,
@@ -98,8 +100,14 @@ export default {
         // Afficher un message de succès
         if (this.ancien_courriel !== this.courriel) {
           this.ancien_courriel = this.courriel;
+          //ajout d'une notification pour le catalogue
+          const notif = useNotifStore();
+          notif.montreMessage('Vous avez été deconnecté avec succès!', 'bloc-modale-succes');
           this.$router.push("/connexion-usager");
         } else {
+          //envoy une notification au catalogue, une fois qu'on y retourne
+          const notif = useNotifStore();
+          notif.montreMessage('Votre information(s) a été modifier avec succès!', 'bloc-modale-succes');
           // Rediriger vers la page de profil après la mise à jour
           this.$router.push("/profil-usager");
         }

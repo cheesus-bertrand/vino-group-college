@@ -104,55 +104,58 @@
   />
   <!-- afficher la liste des bouteilles trouvées, et les actions associées -->
   <div class="liste-bouteilles">
+
     <div
       v-for="bouteille in bouteilles"
       :key="bouteille.id"
-      class="carte-bouteille"
     >
-      <img :src="bouteille.vin.image_url" class="image-vin" />
-
-      <div class="info">
-        <h3>{{ bouteille.vin.nom }}</h3>
-        <p>Cellier : {{ bouteille.cellier.nom }}</p>
-        <p>Prix : {{ bouteille.vin.prix }}$</p>
-        <p>Quantité : {{ bouteille.quantite }}</p>
-
-        <button
-          @click="modifierQuantiteVin(bouteille.quantite - 1, bouteille.id)"
-          class="btn-qte"
-          :disabled="bouteille.quantite <= 1"
-        >
-          <CircleMinus />
-        </button>
-
-        <button
-          @click="modifierQuantiteVin(bouteille.quantite + 1, bouteille.id)"
-          class="btn-qte"
-        >
-          <CirclePlus />
-        </button>
-      </div>
-      <!-- boutons d'action pour chaque bouteille : Afficher les détails, ajouter à la liste de courses, supprimer -->
-      <div class="bouton-cellier">
-        <button @click="voirDetail(bouteille.id)" class="btn btn-cellier">
-          <Eye />
-        </button>
-
-          <button class="btn btn-cellier" @click="ajouterListeAchats(bouteille.vin.id)">
-            <ShoppingBasket class="icons" />
-          </button>
-
-        <button @click="ouvrirModale(bouteille.id)" class="btn btn-cellier">
-          <Trash />
-        </button>
-      </div>
-
       <div v-if="bouteille.messageAjout" class="bloc-modale-succes">
         {{ bouteille.messageAjout }}
       </div>
 
       <div v-if="bouteille.messageErreur" class="erreur">
         {{ bouteille.messageErreur }}
+      </div>
+
+      <div class="carte-bouteille">
+
+        <img :src="bouteille.vin.image_url" class="image-vin" />
+
+        <div class="info">
+          <h3>{{ bouteille.vin.nom }}</h3>
+          <p>Cellier : {{ bouteille.cellier.nom }}</p>
+          <p>Prix : {{ bouteille.vin.prix }}$</p>
+          <p>Quantité : {{ bouteille.quantite }}</p>
+
+          <button
+            @click="modifierQuantiteVin(bouteille.quantite - 1, bouteille.id)"
+            class="btn-qte"
+            :disabled="bouteille.quantite <= 1"
+          >
+            <CircleMinus />
+          </button>
+
+          <button
+            @click="modifierQuantiteVin(bouteille.quantite + 1, bouteille.id)"
+            class="btn-qte"
+          >
+            <CirclePlus />
+          </button>
+        </div>
+        <!-- boutons d'action pour chaque bouteille : Afficher les détails, ajouter à la liste de courses, supprimer -->
+        <div class="bouton-cellier">
+          <button @click="voirDetail(bouteille.id)" class="btn btn-cellier">
+            <Eye />
+          </button>
+
+            <button class="btn btn-cellier" @click="ajouterListeAchats(bouteille.vin.id)">
+              <ShoppingBasket class="icons" />
+            </button>
+
+          <button @click="ouvrirModale(bouteille.id)" class="btn btn-cellier">
+            <Trash />
+          </button>
+        </div>
       </div>
     </div>
   </div>

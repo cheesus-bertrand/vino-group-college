@@ -130,6 +130,7 @@
 <script>
 import Navbar from "../../components/Navbar.vue";
 import api from "../../api";
+import { useNotifStore } from '../../stores/notification';
 
 export default {
   components: {
@@ -198,15 +199,13 @@ export default {
         this.couleur = "";
         this.quantite = "";
 
-        // afficher un message de succès et rediriger vers le catalogue après 2 secondes
-        this.messageSucces =
-          "Votre bouteille a été ajoutée au cellier avec succès !";
+        // afficher un message de succès et rediriger
+        //ajout d'une notification pour le catalogue
+        const notif = useNotifStore();
+        notif.montreMessage('Votre bouteille a été ajoutée au cellier avec succès!', 'bloc-modale-succes');
 
-        setTimeout(() => {
-          this.messageSucces = "";
-          // rediriger vers la page de détail du cellier
-          this.$router.push(`/detail-cellier/${this.cellier_id}`);
-        }, 3000);
+        // rediriger vers la page de détail du cellier
+        this.$router.push(`/detail-cellier/${this.cellier_id}`);
 
         // gestion des erreurs de validation et autres erreurs
       } catch (erreur) {

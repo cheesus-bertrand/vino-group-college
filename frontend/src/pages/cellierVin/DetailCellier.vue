@@ -4,6 +4,11 @@
   <div class="banniere">
     <h1 class="banniere-titre">Cellier: {{ cellierNom }}</h1>
   </div>
+  <!-- Affiche une notification -->
+  <div v-if="notifStore.message" :class="['notif', notifStore.type]">
+    {{ notifStore.message }}
+  </div>
+
   <!-- Lien pour ajouter une bouteille personnalisée -->
   <div>
     <router-link
@@ -45,6 +50,7 @@ import api from "../../api";
 import Navbar from "../../components/Navbar.vue";
 import VinCellierCarte from "../../components/VinCellierCarte.vue";
 import ModalConfirmation from "../../components/ModalConfirmation.vue";
+import { useNotifStore } from '../../stores/notification';
 
 export default {
   components: {
@@ -108,6 +114,11 @@ export default {
       if (item) {
         item.quantite = quantite;
       }
+    },
+  },
+  computed: {
+    notifStore() {
+      return useNotifStore();
     },
   },
   // Afficher les details du cellier (incluant les vins et leur quantite) une fois que la page est monté

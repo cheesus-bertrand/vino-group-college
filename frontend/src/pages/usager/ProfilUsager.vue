@@ -3,6 +3,11 @@
   <div class="banniere">
     <h2 class="banniere-titre">Mon profil</h2>
   </div>
+  <!-- Affiche une notification -->
+  <div v-if="notifStore.message" :class="['notif', notifStore.type]">
+    {{ notifStore.message }}
+  </div>
+
   <!-- Contenu de la page de profil -->
   <div class="profil-page">
     <div class="profil-carte">
@@ -63,12 +68,12 @@
 import { MinusCircleIcon } from "@heroicons/vue/24/solid";
 import { PencilIcon } from "@heroicons/vue/24/solid";
 import { ArrowRightStartOnRectangleIcon } from "@heroicons/vue/24/solid";
-import { useNotifStore } from '../../stores/notification';
 </script>
 
 <script>
 import api from "../../api";
 import Navbar from "../../components/Navbar.vue";
+import { useNotifStore } from '../../stores/notification';
 
 export default {
   components: {
@@ -127,6 +132,11 @@ export default {
       } catch (erreur) {
         this.erreur = "Erreur lors de la deconnexion";
       }
+    },
+  },
+  computed: {
+    notifStore() {
+      return useNotifStore();
     },
   },
   // Affiche le profil de l'usager dès que le composant est monté
