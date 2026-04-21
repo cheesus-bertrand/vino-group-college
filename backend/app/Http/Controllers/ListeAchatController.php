@@ -10,6 +10,7 @@ class ListeAchatController extends Controller
 {
     /**
      * Affiche la liste d'achats.
+     * @return json
      */
     public function index()
     {
@@ -34,15 +35,9 @@ class ListeAchatController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Ajoute une bouteille de vin dans la liste d'achat
+     * @param Request $request
+     * @return json
      */
     public function store(Request $request)
     {
@@ -78,7 +73,9 @@ class ListeAchatController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Recupère les données de la table vins selon usager_id.
+     * @param int $id
+     * @return json
      */
     public function show($id)
     {
@@ -113,23 +110,9 @@ class ListeAchatController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ListeAchat $listeAchat)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ListeAchat $listeAchat)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
+     * Supprime les données dans la table liste_achats.
+     * @param Request $request
+     * @return json
      */
     public function destroy(Request $request)
     {

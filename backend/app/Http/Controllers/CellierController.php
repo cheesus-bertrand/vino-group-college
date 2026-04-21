@@ -11,7 +11,9 @@ use App\Models\Vin;
 class CellierController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Recherche le celier par id du usager.
+     * @param Request $request
+     * @return json
      */
     public function index(Request $request)
     {
@@ -20,17 +22,10 @@ class CellierController extends Controller
             'data' => $celliers
         ]);
     }
-
+   
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Place le nom dans celliers.
+     * @param Request $request
      */
     public function store(Request $request)
     {
@@ -59,25 +54,11 @@ class CellierController extends Controller
             'data' => $cellier
         ], 201);
     }
-
+   
     /**
-     * Display the specified resource.
-     */
-    public function show(Cellier $cellier)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Cellier $cellier)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Mise a jour du nom dans la table celliers.
+     * @param Request $request
+     * @param int #id
      */
     public function update(Request $request, $id)
     {
@@ -115,8 +96,8 @@ class CellierController extends Controller
      * Methode qui permet de récupérer toutes bouteilles 
      * des celliers de l'usager connecté,
      * avec possibilité de recherche et de filtres dynamiques
-     *
-     * @return void
+     * @param Request $request
+     * @return json
      */
     public function bouteillesUsager(Request $request)
     {
@@ -274,7 +255,9 @@ class CellierController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Supprime le cellier.
+     * @param Cellier $cellier
+     * @return json
      */
     public function destroy(Cellier $cellier)
     {

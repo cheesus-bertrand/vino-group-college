@@ -19,7 +19,7 @@ class VinController extends Controller
      * Initialise une requête Eloquent sur le modèle Vin
      * Filtre par un champ spécifié
      * @param Request $request
-     * @return void
+     * @return json
      */
 
     public function index(Request $request)
@@ -217,7 +217,6 @@ class VinController extends Controller
      * @param SAQService $service
      * @return string
      */
-
     public function store(SAQService $service)
     {
         $total = $service->getWines()['total'];
@@ -251,7 +250,11 @@ class VinController extends Controller
         return "Importation est terminée";
     }
 
-    // Crée une bouteille de vin non listée dans le catalogue et l'ajouter au cellier
+    /**
+     * Crée une bouteille de vin non listée dans le catalogue et l'ajouter au cellier.
+     * @param Request $request
+     * @return json
+     */
     public function creerBouteillePersonnalisee(Request $request)
     {
         // Valider les données de la requête
@@ -344,7 +347,11 @@ class VinController extends Controller
             ], 500);
         }
     }
-    // Récupérer la liste des pays disponibles dans la base de données pour les vins
+    
+    /**
+     * Récupérer la liste des pays disponibles dans la base de données pour les vins.
+     * @return json
+     */
     public function recupererPays()
     {
         $listePays = Vin::query()
@@ -360,6 +367,11 @@ class VinController extends Controller
         ]);
     }
 
+    /**
+     * Supprime le vin personalisé. 
+     * @param int $bouteilleSKU
+     * @return json
+     */
     public function supprimerVinPersonnalise($bouteilleSKU)
     {
         // Rechercher la bouteille de vin personnalisée par son SKU
@@ -384,8 +396,12 @@ class VinController extends Controller
 
         return response()->json(['message' => 'La bouteille personnalisée est supprimée']);
     }
-
-    // Récupérer les détails d'un vin à partir de son SKU
+ 
+    /**
+     * Récupérer les détails d'un vin à partir de son SKU.
+     * @param int $sku
+     * @return json
+     */
     public function chercherVinPersonnalise($sku)
     {
         $vin = Vin::where('sku', $sku)->first();
@@ -397,7 +413,11 @@ class VinController extends Controller
         }
     }
 
-    // Modifier une bouteille personnalisée dans la table des vins
+    /**
+     * Modifier une bouteille personnalisée dans la table des vins.
+     * @param Request $request
+     * @param int $sku
+     */
     public function modifierBouteillePersonnalisee(Request $request, $sku)
     {
         // Valider les données de la requête
