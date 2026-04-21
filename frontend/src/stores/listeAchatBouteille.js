@@ -6,6 +6,7 @@ export const useListeStore = defineStore("listeAchat", {
   state: () => ({
     bouteilleVin: null,
     loading: false,
+    review: null,
   }),
 
   actions: {
@@ -22,6 +23,10 @@ export const useListeStore = defineStore("listeAchat", {
         );
 
         this.bouteilleVin = res.data;
+
+        if (this.bouteilleVin && this.bouteilleVin.vin_id) {
+          await this.fetchReview(this.bouteilleVin.vin_id, this.bouteilleVin.usager_id);
+        }        
       } catch (error) {
         console.error(error);
 
@@ -33,5 +38,16 @@ export const useListeStore = defineStore("listeAchat", {
         this.loading = false;
       }
     },
+    async fetchReview(vinId, usagerId) {
+      try {
+        const res = await axios.get(
+          `http://localhost:8000/api/reviews/${vinId}/${usagerId}`,
+          { withCredentials: true }
+        );
+        this.review = res.data;
+      } catch (error) {
+        this.review = null;
+      }
+    }
   },
 });

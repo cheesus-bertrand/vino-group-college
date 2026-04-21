@@ -106,6 +106,9 @@ class ListeAchatController extends Controller
             'degre_alcool' => $listeAchat->vin->degre_alcool,
             'taux_sucre' => $listeAchat->vin->taux_sucre,
             'sku' => $listeAchat->vin->sku,
+            // for reviews
+            'vin_id' => $listeAchat->vin_id,
+            'usager_id' => $listeAchat->usager_id,
         ]);
     }
 

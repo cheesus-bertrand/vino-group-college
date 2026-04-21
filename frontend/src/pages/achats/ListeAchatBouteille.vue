@@ -9,6 +9,14 @@
       @supprimer-bouteille="ouvrirModale"
       @modifier-bouteille="modifierBouteille"
     />
+
+    <Review 
+			v-if="store.bouteilleVin" 
+			:initialRating="store.review?.rating"
+      :initialComment="store.review?.comment" 
+      @save="handleSaveReview"
+		/>
+
     <!-- Affichage de la modale de confirmation pour la suppression de la bouteille -->
     <ModalConfirmation
       :show="afficherModale"
@@ -26,6 +34,7 @@ import { useListeStore } from "../../stores/listeAchatBouteille.js";
 import Navbar from "../../components/Navbar.vue";
 import api from "../../api";
 import VinCarte from "../../components/VinCarte.vue";
+import Review from "../../components/Review.vue";
 import ModalConfirmation from "../../components/ModalConfirmation.vue";
 
 export default {
@@ -33,6 +42,7 @@ export default {
     Navbar,
     VinCarte,
     ModalConfirmation,
+    Review,
   },
 
   data() {
@@ -76,6 +86,21 @@ export default {
         `/bouteille/ModifierBouteillePerso/${this.store.bouteilleVin.sku}`,
       );
     },
+    async handleSaveReview(data) {
+      try {
+				await api.post('/reviews', {
+					vin_id: this.store.bouteilleVin.vin_id,
+          usager_id: this.store.bouteilleVin.usager_id,
+					rating: data.rating,
+					comment: data.comment
+				});
+				
+				this.store.review = { ...data };
+				
+			} catch (error) {
+				console.error(error);
+			}
+		},    
   },
 };
 </script>
