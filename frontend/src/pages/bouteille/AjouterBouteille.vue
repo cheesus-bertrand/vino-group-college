@@ -35,10 +35,7 @@
         @input="corrigerValeur"
         placeholder="0"
       />
-      <input type="number" v-model.number="quantite" placeholder="0" />
-      <div v-if="erreurs.quantite" class="erreur">
-        {{ erreurs.quantite[0] }}
-      </div>
+
       <button type="submit" class="signup-btn btn">Enregistrer</button>
       <div v-if="message" class="erreur">
         {{ message }}
@@ -105,8 +102,7 @@ export default {
         );
 
         this.$router.push("/catalogue");
-          "bloc-modale-succes",
-        );
+        this.$router.back();
 
         this.$router.back();
       } catch (erreur) {
