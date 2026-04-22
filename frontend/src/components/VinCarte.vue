@@ -10,7 +10,6 @@
         class="vin-image"
         :alt="'Le nom du vin est : ' + bouteilleVin.nom"
       />
-      <img :src="bouteilleVin.image" class="vin-image" />
     </div>
     <div class="vin-contenu">
       <h1 class="vin-titre">
