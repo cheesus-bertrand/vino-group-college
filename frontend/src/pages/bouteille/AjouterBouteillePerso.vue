@@ -26,7 +26,7 @@
       <input
         id="prix"
         class="form-input"
-        type="number"
+        type="decimal"
         v-model="prix"
         placeholder="Ex: 24.99"
         aria-label="prix"
@@ -165,7 +165,7 @@
 <script>
 import Navbar from "../../components/Navbar.vue";
 import api from "../../api";
-import { useNotifStore } from '../../stores/notification';
+import { useNotifStore } from "../../stores/notification";
 
 export default {
   components: {
@@ -237,7 +237,10 @@ export default {
         // afficher un message de succès et rediriger
         //ajout d'une notification pour le catalogue
         const notif = useNotifStore();
-        notif.montreMessage('Votre bouteille a été ajoutée au cellier avec succès!', 'bloc-modale-succes');
+        notif.montreMessage(
+          "Votre bouteille a été ajoutée au cellier avec succès!",
+          "bloc-modale-succes",
+        );
 
         // rediriger vers la page de détail du cellier
         this.$router.push(`/detail-cellier/${this.cellier_id}`);

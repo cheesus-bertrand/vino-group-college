@@ -18,7 +18,7 @@
       <label>Prix</label>
       <input
         class="form-input"
-        type="number"
+        type="decimal"
         v-model="prix"
         placeholder="Ex: 24.99"
       />
