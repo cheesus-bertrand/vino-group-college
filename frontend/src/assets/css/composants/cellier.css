@@ -43,6 +43,7 @@
 .bouton-cellier {
   display: flex;
   flex-direction: column;
+  padding-left: 10px;
 }
 
 .cellier-lien-ajout-bouteille {
