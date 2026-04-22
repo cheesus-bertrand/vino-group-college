@@ -29,23 +29,24 @@
             :style="{ backgroundColor: chercherCouleur(vin.couleur) }"
           ></span>
         </p>
-        <div class="catalogue-carte-actions">
-          <!-- Lien pour ajouter la bouteille au cellier -->
-          <router-link
-            class="catalogue-carte-btn"
-            :to="`/bouteille/AjouterBouteille/${vin.id}`"
-          >
-            Ajouter au cellier
+
+        <ActionBar orientation="horizontal" variant="inverted" size="sm" labelPosition="beside" :showLabels="true">         
+          <router-link class="action-item" :to="`/bouteille/AjouterBouteille/${vin.id}`" title="Cellier" aria-label="Cellier">
+            <PlusCircle />
+            <span>Cellier</span>
           </router-link>
-          <!-- Bouton pour ajouter la bouteille à la liste d'achats -->
-          <button
-            class="liste-btn catalogue-carte-btn btn-achat"
-            @click="ajouterListeAchats"
-            aria-label="Ajouter à la liste d'achats"
-          >
-            <ShoppingBasket class="icons" />
-          </button>
-        </div>
+
+          <div class="action-item" @click="ajouterListeAchats" title="Achat" aria-label="Achat">
+            <ShoppingBasket />
+            <span>Achat</span>
+          </div>
+
+          <div :class="['action-item', { 'is-active': montrerInfo }]" @click="toggleInfo" title="Infos" aria-label="Infos">
+            <Info />
+            <span>Infos</span>
+          </div>
+        </ActionBar>
+
       </div>
     </div>
     <!-- Affichage des informations supplémentaires au survol -->
@@ -59,22 +60,21 @@
         <p>Format (ml) : {{ vin.format }}</p>
       </div>
     </div>
-    <!-- Bouton pour basculer l'affichage des informations supplémentaires -->
-    <button class="info-btn" @click.stop="toggleInfo">
-      {{ montrerInfo ? "↓" : "↑" }}
-      <span class="info-fleche">Infos</span>
-    </button>
   </div>
 </template>
 
 <script>
-import { ShoppingBasket } from "lucide-vue-next";
+import { ShoppingBasket, Info, PlusCircle } from "lucide-vue-next";
 import api from "../api";
 import { useAuthStore } from "../stores/auth";
+import ActionBar from "./ActionBar.vue";
 
 export default {
   components: {
     ShoppingBasket,
+    Info,
+    PlusCircle,
+    ActionBar,
   },
 
   props: {
@@ -132,7 +132,7 @@ export default {
     },
     // Fonction pour déterminer le badge en fonction du nom du vin
     chercherBadge(vin) {
-      const name = vin.name.toLowerCase();
+      const name = (vin && vin.nom) ? vin.nom.toLowerCase() : "";
 
       if (name.includes("malbec")) {
         return { text: "DÉLICAT ET LÉGER", color: "#8b0000" };
