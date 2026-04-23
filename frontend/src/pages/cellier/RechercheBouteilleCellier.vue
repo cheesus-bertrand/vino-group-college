@@ -12,6 +12,7 @@
       type="text"
       placeholder="Rechercher une bouteille..."
       class="search-input"
+      aria-label="Rechercher une bouteille"
     />
   </div>
 
@@ -114,7 +115,11 @@
 
       <div class="nom-cellier">
         <div class="vin-cellier-carte">
-          <img :src="bouteille.vin.image_url" class="image-vin" />
+          <img
+            :src="bouteille.vin.image_url"
+            class="image-vin"
+            :alt="'Le nom du vin est : ' + bouteille.vin.nom"
+          />
           <div class="vin-cellier-carte-info">
             <h3>{{ bouteille.vin.nom }}</h3>
             <p>Cellier : {{ bouteille.cellier.nom }}</p>
@@ -124,12 +129,14 @@
               @click="modifierQuantiteVin(bouteille.quantite - 1, bouteille.id)"
               class="btn-qte"
               :disabled="bouteille.quantite <= 1"
+              aria-label="Diminuer la quantité"
             >
               <CircleMinus />
             </button>
             <button
               @click="modifierQuantiteVin(bouteille.quantite + 1, bouteille.id)"
               class="btn-qte"
+              aria-label="Augmenter la quantité"
             >
               <CirclePlus />
             </button>
@@ -137,16 +144,25 @@
         </div>
         <!-- boutons d'action pour chaque bouteille : Afficher les détails, ajouter à la liste de courses, supprimer -->
         <div class="bouton-cellier">
-          <button @click="voirDetail(bouteille.id)" class="btn btn-cellier">
+          <button
+            @click="voirDetail(bouteille.id)"
+            class="btn btn-cellier"
+            aria-label="Voir le detail"
+          >
             <Eye />
           </button>
           <button
             class="btn btn-cellier"
             @click="ajouterListeAchats(bouteille.vin.id)"
+            aria-label="Ajouter a la liste d achat"
           >
             <ShoppingBasket class="icons" />
           </button>
-          <button @click="ouvrirModale(bouteille.id)" class="btn btn-cellier">
+          <button
+            @click="ouvrirModale(bouteille.id)"
+            class="btn btn-cellier"
+            aria-label="Supprimer"
+          >
             <Trash />
           </button>
         </div>
